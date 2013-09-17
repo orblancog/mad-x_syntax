@@ -1,11 +1,11 @@
 # This is the README file
   for MAD-X highlighting in emacs
 
-# Files in this folder
+# Important files in this folder
 + .emacs
 + madx.el
 + README
-
+Any other file is temporary, and it is used to do test and debugging.
 
 # Version description
 V   Date        Description
@@ -37,6 +37,6 @@ If you want to highlight another buffer with this syntax, just do in emacs
 M+X madx-mode
 
 # Author
-Oscar Blanco
+Oscar BLANCO
 oscar.roberto.blanco.garcia@cern.ch
 

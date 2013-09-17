@@ -1,0 +1,613 @@
+! This is a test file. NOT A PROPER MAD-X FILE!!!
+! Its purpose is to contain MAD-X instruction in order to test how are
+!   they highlighted
+
+
+  TITLE, "ATF2 Optics (v3.8)";
+
+/*
+! ==============================================================================
+! initial conditions (entrance to DR extraction kicker)
+! ------------------------------------------------------------------------------
+*/
+// comment 
+IF 
+assign
+
+ealign 
+sextupole
+aperture
+betx
+:= -> 
+poa a:= a ->
+beam
+if 
+IF
+else
+
+ealign 
+
+cos
+sin
+
+  TITLE, 'OTR"o"OTIT';
+  TITLE, 'OTRO';
+  TITLE, "OTRO";
+  TITLE, "OTR'=aaaa'O";
+   E0d    := 1.542282; !design beam energy (GeV)
+
+  E0     := 1.3     ; !nominal beam energy (GeV)
+  EMITX  := 2.0E-9  ; !geometric horizontal emittance (m)
+  EMITYn := 3.0E-8  ; !normalized vertical emittance (m)
+    BLENG  := 8.0E-3  ; !bunch length (m)
+  ESPRD  := 0.8E-3  ; !energy spread (1)
+  TBETX  := 6.54290 ; !twiss beta x (m)
+  TALFX  := 0.99638 ; !twiss alpha x
+  TDX    := 4.94E-8 ; !eta x (m)
+  TDPX   := -6.3E-9 ; !eta' x
+  TBETY  := 3.23785 ; !twiss beta y (m)
+  TALFY  := -1.9183 ; !twiss alpha y
+  TDY    := 0       ; !eta y (m)
+  TDPY   := 0       ; !eta' y
+
+! ==============================================================================
+! global parameters
+! ------------------------------------------------------------------------------
+
+  Cb      := 1.0E10/CLIGHT;
+  Brho    := Cb*E0;
+  betamax := 120;
+
+! ==============================================================================
+! construct input beam matrix (assumes TDY=TDPY=0)
+! ------------------------------------------------------------------------------
+
+  EMITXn := EMITX*(E0/EMASS);
+  EMITY  := EMITYn/(E0/EMASS);
+
+  BEAM, PARTICLE=ELECTRON, ENERGY=E0, EX=EMITX, EY=EMITY,
+        SIGT=BLENG, SIGE=ESPRD, NPART=2.0E+10;
+->
+
+  TGAMX := (1+TALFX*TALFX)/TBETX;
+  TGAMY := (1+TALFY*TALFY)/TBETY;
+  SIG11 := EMITX*TBETX+TDX*TDX*ESPRD*ESPRD;
+  SIG21 := -EMITX*TALFX+TDX*TDPX*ESPRD*ESPRD;
+  SIG22 := EMITX*TGAMX+TDPX*TDPX*ESPRD*ESPRD;
+  C21   := SIG21/SQRT(SIG11*SIG22);
+  SIG33 := EMITY*TBETY;
+  SIG43 := -EMITY*TALFY;
+  SIG44 := EMITY*TGAMY;
+  C43   := SIG43/SQRT(SIG33*SIG44);
+  SIG61 := TDX*ESPRD*ESPRD;
+  SIG62 := TDPX*ESPRD*ESPRD;
+  SIG66 := ESPRD*ESPRD;
+  C61   := SIG61/SQRT(SIG11*SIG66);
+  C62   := SIG62/SQRT(SIG22*SIG66);
+!  SIG0  : SIGMA0, SIGX=SQRT(SIG11), SIGPX=SQRT(SIG22), R21=C21, &
+!                  SIGY=SQRT(SIG33), SIGPY=SQRT(SIG44), R43=C43, &
+!                  SIGT=BLENG      , SIGPT=ESPRD      , R61=C61, R62=C62
+
+clight
+betx.se
+ae #e e
+# e ee e #s s
+R16
+T123
+mu11
+betx
+ALFa12p
+aper_5
+
+->
+! ==============================================================================
+! load XSIF files
+! ------------------------------------------------------------------------------
+
+call, file='common.xsifx';
+
+call, file='EXT.xsifx';
+
+call, file='FF.xsifx';
+
+call, file='matchline';
+
+ATF2 : LINE=(MLinv,EXTm,FFm);
+call,orbit
+call, file="MisalignMacro3.madx";  ! this files set the tilt of the multipoles
+
+!call, file="MisAligns_init_values0.madx"; ! 
+
+!!____quadrupole & sextupole strengths for ATF2 Bx2.5By1.0 lattice____!!
+
+call,file='k_bx10by100_v2_mults';
+
+use, period=ATF2;
+
+exec, misalign(0);
+
+esave;
+BETX, 
+select, flag=twiss,clear;
+select, flag=twiss,column=name,s,betx,bety, alfx, alfy ,mux, muy, DX, DPX,DY,DPY,k1l;
+!select, flag=twiss,column=name,s,k1l,k2l,k3l;
+
+!betx=6.5429, bety=3.23785,alfx=-0.99638,alfy=1.9183,
+
+twiss, beta0=mline,  mux=0,muy=0, deltap=0.0,file="twiss",save;
+
+
+y!stop;
+
+plot,colour=100,title="ATF2",haxis=s,vaxis1=betx,bety,vaxis2=dx;
+
+option, -echo, -warn, -info;
+
+ptc_create_universe;
+       ptc_create_layout,model=2,method=6,nst=10;
+       ptc_align;
+      call, file="inrays0.madx";
+      ptc_track, dump, turns=1, icase=5, onetable;
+       ptc_normal,icase=5,no=5,deltap=0.00;
+ptc_end;
+
+stop;   
+
+!Oscar Blanco - 15.03.2012
+flatten;
+savebeta, label = bini, place = #s;
+twiss, sequence = ATF2, beta0=bini;
+MATCH,USE_MACRO;
+    VARY, NAME=KQM16FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM15FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM14FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM13FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM12FF , STEP=0.0001,LOWER=-32,UPPER=32;
+
+    M1: MACRO={          !assign, echo="scum";
+       	exec, misalign(0);
+        twiss, beta0=mline,  table=twiss, file=twiss;
+        !###PTC  To procude fort_edu.18
+!        ptc_create_universe;
+!        ptc_create_layout,model=2,method=6,nst=10;
+!        ptc_align;
+!        ptc_normal,icase=5,no=3,deltap=0.00;
+!        ptc_end;
+    };
+
+    CONSTRAINT, EXPR= table(twiss, IP, DX)*1e6=0*1e6;
+    CONSTRAINT, EXPR= table(twiss, IP, BETX)*1e5=0.004*1e-3;
+    CONSTRAINT, EXPR= table(twiss, IP, BETY)*1e7=0.1*1e-3;
+    CONSTRAINT, EXPR= table(twiss, IP, ALFY)*1e3=0.000  ;
+    CONSTRAINT, EXPR= table(twiss, IP, ALFX)*1e3=0.000  ;
+
+    simplex, TOLERANCE=1.0E-4, calls=500;
+ENDMATCH;
+
+!stop;   
+
+twiss, beta0=mline,  mux=0,muy=0, deltap=0.0,file="twiss",save;
+plot,colour=100,title="ATF2 2",haxis=s,vaxis1=betx,bety,vaxis2=dx;
+
+
+
+!-----------------------------------------------------------------------!
+
+! #### MATCH, use Mixed macro for optimising
+MATCH,USE_MACRO;
+
+    VARY, NAME=KSSFF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF6FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF5FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSD4FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF1FF, STEP=0.001,LOWER=-660,UPPER=660;
+    VARY, NAME=KSD0FF, STEP=0.001,LOWER=-660,UPPER=660;
+
+/*
+    VARY, NAME=KSSFF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF6FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF5FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSD4FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF1FF, STEP=0.001,LOWER=-660,UPPER=660;
+    VARY, NAME=KSD0FF, STEP=0.001,LOWER=-660,UPPER=660;
+    vary, name=SF6TT, step=0.001,LOWER=-0.08,UPPER=0.08;
+    VARY, NAME=SF5TT, STEP=0.001,LOWER=-540,UPPER=540;
+    vary, name=SD4TT, step=0.001,LOWER=-0.08,UPPER=0.08;
+    vary, name=SF1TT, step=0.001,LOWER=-0.08,UPPER=0.08;
+    vary, name=SD0TT, step=0.001,LOWER=-0.08,UPPER=0.08;
+      !FFS Quads
+    VARY, NAME=KQM16FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM15FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM14FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM13FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM12FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM11FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD10FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF9FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD8FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF7FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD6FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF5FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD4FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF3FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2AFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2BFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF1FF  , STEP=0.00001,LOWER=-4.3,UPPER=4.3;
+    VARY, NAME=KQD0FF  , STEP=0.00001,LOWER=-6.5,UPPER=6.5;
+
+*/
+     M1: MACRO={          !assign, echo="scum";
+	exec, misalign(0);
+!        twiss, beta0=mline,  table=twiss, file=twiss;
+        !###PTC  To procude fort_edu.18
+        ptc_create_universe;
+        ptc_create_layout,model=2,method=6,nst=10;
+        ptc_align;
+        ptc_normal,icase=5,no=3,deltap=0.00;
+        ptc_end;
+!sigmax4, sigmay4,sigmax5, sigmay5, 
+        system, "python getSigmasMixed25.py | tail -n 2 > sigmatemp.madx";
+        call, file="sigmatemp.madx";
+                             assign, echo="values.temp.madx";
+                             value,sigmax5, sigmay5,beta_x,beta_y,alfa_x,alfa_y,D_x,
+						    KSSFF,
+						    KSF6FF,
+						    KSF5FF,
+						    KSD4FF,
+						    KSF1FF,
+						    KSD0FF,
+ 						    KQM16FF,
+						    KQM15FF,
+						    KQM14FF,
+						    KQM13FF,
+						    KQM12FF,
+						    KQM11FF,
+						    KQD10BFF ,
+						    KQD10AFF ,
+						    KQF9BFF  ,
+						    KQF9AFF  ,
+						    KQD8FF  ,
+						    KQF7FF  ,
+						    KQD6FF  ,
+						    KQF5BFF  ,
+						    KQF5AFF  ,
+						    KQD4BFF  ,
+						    KQD4AFF  ,
+						    KQF3FF  ,
+						    KQD2AFF  ,
+						    KQD2BFF  ,
+						    KQF1FF  ,
+                                                    KQD0FF  ;
+
+                             assign, echo=terminal;
+                            };
+!    CONSTRAINT, EXPR= sigmax2*1e8=   2.9e-06 *1e8;
+!    CONSTRAINT, EXPR= sigmay2*5e10=   6.0e-08 *5e10;
+!    CONSTRAINT, EXPR= sigmax3*1e10=   3.0e-06 *1e10;
+!    CONSTRAINT, EXPR= sigmay3*5e12=   2.7e-08 *5e12;
+    CONSTRAINT, EXPR= sigmax5*1e8=   3.0e-06 *1e8;
+    CONSTRAINT, EXPR= sigmay5*5e10=   3.8e-08 *5e10;
+!    CONSTRAINT, EXPR= beta_x*2e5=    4.0e-03 *2e5;
+!    CONSTRAINT, EXPR= beta_y*8e7=    25e-06 *8e7;
+!    CONSTRAINT, EXPR= alfa_x*5e2=    0.01e-01 *5e2;
+!    CONSTRAINT, EXPR= alfa_y*1e2=    0.01e-01 *1e2;
+!    CONSTRAINT, EXPR= D_x*5e9=       1.0e-07 *5e9;
+    !CONSTRAINT, EXPR= table(twiss, IP, DX)*1e6=0*1e6;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETX)*1e5=0.008*1e5;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETY)*1e7=0.000025286*1e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFY)*1e3=0.000  ;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFX)*1e3=0.000  ;
+    
+
+    simplex, TOLERANCE=1.0E-4, calls=8000;
+ENDMATCH;
+
+stop;
+
+
+MATCH,USE_MACRO;
+      !FFS Sext
+    VARY, NAME=KSF6FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF5FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSD4FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF1FF, STEP=0.001,LOWER=-660,UPPER=660;
+    VARY, NAME=KSD0FF, STEP=0.001,LOWER=-660,UPPER=660;
+ 
+    vary, name=SF6TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF5TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD4TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF1TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD0TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+/*      !FFS Quads
+    VARY, NAME=KQM16FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM15FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM14FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM13FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM12FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM11FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD10FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF9FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD8FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF7FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD6FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF5FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD4FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF3FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2AFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2BFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF1FF  , STEP=0.00001,LOWER=-4.3,UPPER=4.3;
+    VARY, NAME=KQD0FF  , STEP=0.00001,LOWER=-6.5,UPPER=6.5;
+*/
+     M1: MACRO={          !assign, echo="scum";
+	exec, misalign(0);
+        twiss, beta0=mline,  table=twiss, file=twiss;
+        !###PTC  To procude fort_edu.18
+        ptc_create_universe;
+        ptc_create_layout,model=2,method=6,nst=10;
+        ptc_align;
+        ptc_normal,icase=5,no=6,deltap=0.00;
+        ptc_end;
+        system, "./getSigmasMixed25.py | tail -n 11 > sigmatemp.madx";
+        call, file="sigmatemp.madx";
+                             assign, echo="values.temp.madx";
+                             value,sigmax2, sigmay2,sigmax3, sigmay3, sigmax5, sigmay5,beta_x,beta_y,alfa_y,D_x,D_y,
+						    KSF6FF,
+						    KSF5FF,
+						    KSD4FF,
+						    KSF1FF,
+						    KSD0FF,
+						    SF6TT  ,
+						    SF5TT  ,
+						    SD4TT  ,
+						    SF1TT  ,
+						    SD0TT  ,
+						    KQM16FF,
+						    KQM15FF,
+						    KQM14FF,
+						    KQM13FF,
+						    KQM12FF,
+						    KQM11FF,
+						    KQD10FF ,
+						    KQF9FF  ,
+						    KQD8FF  ,
+						    KQF7FF  ,
+						    KQD6FF  ,
+						    KQF5FF  ,
+						    KQD4FF  ,
+						    KQF3FF  ,
+						    KQD2AFF  ,
+						    KQD2BFF  ,
+						    KQF1FF  ,
+                                                    KQD0FF  ;
+
+                             assign, echo=terminal;
+                            };
+!    CONSTRAINT, EXPR= sigmax2*1e9=   4.3e-06 *1e9;
+!    CONSTRAINT, EXPR= sigmay2*1e12=   2.0e-08 *1e12;
+    CONSTRAINT, EXPR= sigmax3*1e9=   4.3e-06 *1e9;
+    CONSTRAINT, EXPR= sigmay3*1e12=   2.2e-08 *1e12;
+    CONSTRAINT, EXPR= sigmax5*1e9=   4.4e-06 *1e9;
+    CONSTRAINT, EXPR= sigmay5*1e12=   2.3e-08 *1e12;
+!    CONSTRAINT, EXPR= beta_x*1e7=    7.0e-03 *1e7;
+!    CONSTRAINT, EXPR= beta_y*1e8=    2.5e-05 *1e8;
+!    CONSTRAINT, EXPR= alfa_y*5e4=    1.5e-03 *5e4;
+    CONSTRAINT, EXPR= D_x*5e7=       1.0e-06 *5e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, DX)*1e6=0*1e6;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETX)*1e5=0.008*1e5;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETY)*1e7=0.000025286*1e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFY)*1e3=0.000  ;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFX)*1e3=0.000  ;
+    
+
+    simplex, TOLERANCE=1.0E-4, calls=5000;
+ENDMATCH;
+
+stop;
+
+
+MATCH,USE_MACRO;
+      !FFS Sext
+
+    VARY, NAME=KSF6FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF5FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSD4FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF1FF, STEP=0.001,LOWER=-660,UPPER=660;
+    VARY, NAME=KSD0FF, STEP=0.001,LOWER=-660,UPPER=660;
+
+    vary, name=SF6TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF5TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD4TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF1TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD0TT, step=0.001,LOWER=-0.06,UPPER=0.06;
+/*    !FFS Quads
+    VARY, NAME=KQM16FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM15FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM14FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM13FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM12FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM11FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD10FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF9FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD8FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF7FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD6FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF5FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD4FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF3FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2AFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2BFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF1FF  , STEP=0.00001,LOWER=-4.3,UPPER=4.3;
+    VARY, NAME=KQD0FF  , STEP=0.00001,LOWER=-6.5,UPPER=6.5;
+*/
+     M1: MACRO={          !assign, echo="scum";
+	exec, misalign(0);
+        twiss, beta0=mline,  table=twiss, file=twiss;
+        !###PTC  To procude fort_edu.18
+        ptc_create_universe;
+        ptc_create_layout,model=2,method=6,nst=10;
+        ptc_normal,icase=5,no=6,deltap=0.00;
+        ptc_end;
+        system, "./getSigmasMixed25.py | tail -n 9 > sigmatemp.madx";
+        call, file="sigmatemp.madx";
+                             assign, echo="values.temp.madx";
+                             value,sigmax3, sigmay3, sigmax5, sigmay5,beta_x,beta_y,alfa_y,D_x,D_y,
+						    KSF6FF,
+						    KSF5FF,
+						    KSD4FF,
+						    KSF1FF,
+						    KSD0FF,
+						    SF6TT  ,
+						    SF5TT  ,
+						    SD4TT  ,
+						    SF1TT  ,
+						    SD0TT  :
+/*
+						    KQM16FF,
+						    KQM15FF,
+						    KQM14FF,
+						    KQM13FF,
+						    KQM12FF,
+						    KQM11FF,
+						    KQD10FF ,
+						    KQF9FF  ,
+						    KQD8FF  ,
+						    KQF7FF  ,
+						    KQD6FF  ,
+						    KQF5FF  ,
+						    KQD4FF  ,
+						    KQF3FF  ,
+						    KQD2AFF  ,
+						    KQD2BFF  ,
+						    KQF1FF  ,
+                                                    KQD0FF  ;
+*/
+                             assign, echo=terminal;
+                            };
+!    CONSTRAINT, EXPR= sigmax3*1e9=   4.3e-06 *1e9;
+!    CONSTRAINT, EXPR= sigmay3*1e12=   2.5e-08 *1e12;
+    CONSTRAINT, EXPR= sigmax5*1e9=   4.5e-06 *1e9;
+    CONSTRAINT, EXPR= sigmay5*1e12=   2.8e-08 *1e12;
+!    CONSTRAINT, EXPR= beta_x*1e7=    6.0e-03 *1e7;
+!    CONSTRAINT, EXPR= beta_y*1e10=    5.00e-05 *1e10;
+!    CONSTRAINT, EXPR= alfa_y*5e4=    0.5e-02 *5e4;
+!    CONSTRAINT, EXPR= D_x*5e7=       1.0e-06 *5e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, DX)*1e6=0*1e6;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETX)*1e5=0.008*1e5;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETY)*1e7=0.000025286*1e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFY)*1e3=0.000  ;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFX)*1e3=0.000  ;
+    
+
+    simplex, TOLERANCE=1.0E-4, calls=3000;
+ENDMATCH;
+
+stop;
+
+MATCH,USE_MACRO;
+      !FFS Sext
+    VARY, NAME=KSF6FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF5FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSD4FF, STEP=0.001,LOWER=-540,UPPER=540;
+    VARY, NAME=KSF1FF, STEP=0.001,LOWER=-660,UPPER=660;
+    VARY, NAME=KSD0FF, STEP=0.001,LOWER=-660,UPPER=660;
+/* 
+    vary, name=SF6TILT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF5TILT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD4TILT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SF1TILT, step=0.001,LOWER=-0.06,UPPER=0.06;
+    vary, name=SD0TILT, step=0.001,LOWER=-0.06,UPPER=0.06;
+      !FFS Quads
+    VARY, NAME=KQM16FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM15FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM14FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM13FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM12FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQM11FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD10FF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF9FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD8FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF7FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD6FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF5FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD4FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF3FF  , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2AFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQD2BFF , STEP=0.0001,LOWER=-32,UPPER=32;
+    VARY, NAME=KQF1FF  , STEP=0.00001,LOWER=-4.3,UPPER=4.3;
+    VARY, NAME=KQD0FF  , STEP=0.00001,LOWER=-6.5,UPPER=6.5;
+*/
+     M1: MACRO={          !assign, echo="scum";
+        twiss, beta0=mline,  table=twiss, file=twiss;
+        !###PTC  To procude fort_edu.18
+        ptc_create_universe;
+        ptc_create_layout,model=2,method=6,nst=10;
+        ptc_normal,icase=5,no=6,deltap=0.00;
+        ptc_end;
+        system, "./getSigmasMixed25.py | tail -n 9 > sigmatemp.madx";
+        call, file="sigmatemp.madx";
+                             assign, echo="values.temp.madx";
+                             value,sigmax3, sigmay3, sigmax5, sigmay5,beta_x,beta_y,alfa_y,D_x,D_y,
+						    KSF6FF,
+						    KSF5FF,
+						    KSD4FF,
+						    KSF1FF,
+						    KSD0FF;
+/*
+						    SF6TILT  ,
+						    SF5TILT  ,
+						    SD4TILT  ,
+						    SF1TILT  ,
+						    SD0TILT  ;
+
+						    KQM16FF,
+						    KQM15FF,
+						    KQM14FF,
+						    KQM13FF,
+						    KQM12FF,
+						    KQM11FF,
+						    KQD10FF ,
+						    KQF9FF  ,
+						    KQD8FF  ,
+						    KQF7FF  ,
+						    KQD6FF  ,
+						    KQF5FF  ,
+						    KQD4FF  ,
+						    KQF3FF  ,
+						    KQD2AFF  ,
+						    KQD2BFF  ,
+						    KQF1FF  ,
+                                                    KQD0FF  ;
+*/
+                             assign, echo=terminal;
+                            };
+!    CONSTRAINT, EXPR= sigmax3*1e9=   4.3e-06 *1e9;
+!    CONSTRAINT, EXPR= sigmay3*1e12=   3.6e-08 *1e12;
+    CONSTRAINT, EXPR= sigmax5*1e9=   4.5e-06 *1e9;
+    CONSTRAINT, EXPR= sigmay5*1e12=   2.8e-08 *1e12;
+!    CONSTRAINT, EXPR= beta_x*1e7=    6.0e-03 *1e7;
+!    CONSTRAINT, EXPR= beta_y*1e10=    5.00e-05 *1e10;
+!    CONSTRAINT, EXPR= alfa_y*5e4=    1.5e-03 *5e4;
+!    CONSTRAINT, EXPR= D_x*5e7=       1.0e-06 *5e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, DX)*1e6=0*1e6;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETX)*1e5=0.008*1e5;
+    !CONSTRAINT, EXPR= table(twiss, IP, BETY)*1e7=0.000025286*1e7;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFY)*1e3=0.000  ;
+    !CONSTRAINT, EXPR= table(twiss, IP, ALFX)*1e3=0.000  ;
+    
+
+    simplex, TOLERANCE=1.0E-4, calls=500;
+ENDMATCH;
+
+
+stop;
+
+ptc_create_universe;
+!PTC_SETSWITCH, fringe=true;
+ptc_create_layout,model=2,method=6,nst=10;
+!SELECT, flag=ptc_twiss, column=name, s, beta11, beta12, beta21, beta22, beta33, mu2,,mu3,gama11, disp1,disp3;
+!ptc_twiss, icase=5, no=1,deltap=0.0, file='twiss.ptc', beta0=mline;
+
+ptc_normal,icase=5,no=5,deltap=0.00;
+ptc_end;
+
+
