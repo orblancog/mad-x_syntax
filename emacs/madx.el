@@ -2,33 +2,73 @@
 
 ;; Author: Oscar Roberto Blanco Garcia 
 ;; email : <oscar.roberto.blanco.garcia@cern.ch>
-;; Version: 1.0
-;; Created: 17.05.2012
+;; version: 1.1
+;; Created: 21.05.2015
 ;; Keywords: MAD-X major-mode
 
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
 ;; published by the Free Software Foundation; either version 2 of
 ;; the License, or (at your option) any later version.
-
 ;; This program is distributed in the hope that it will be
 ;; useful, but WITHOUT ANY WARRANTY; without even the implied
 ;; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
 ;; PURPOSE.  See the GNU General Public License for more details.
-
 ;; You should have received a copy of the GNU General Public
 ;; License along with this program; if not, write to the Free
 ;; Software Foundation, Inc., 59 Temple Place, Suite 330, Boston,
 ;; MA 02111-1307 USA
 
-;;; Commentary:
-;; 
+;;;Comments about the origin :
 ;; This mode is modified from an example used in a tutorial about Emacs
 ;; mode creation. The tutorial can be found here:
 ;; http://two-wugs.net/emacs/mode-tutorial.html
+;; New code available at
+;; https://github.com/orblancog/mad-x_syntax.git
+;; For mad instructions, visit
+;; mad.web.cern.ch/mad/
+;; Other syntax highlightings could be found inside the
+;; mad sources. Check the syntax folder
+;; Write me to the email address above about any bug including
+;; an example.
 
-;; Add this to your .emacs file to load and bind it to files with extension
-;; .madx
+;;;INSTALLATION
+
+;;;Installation for emacs v 23.X.X:
+;; 1. If dir ~/.emacs.d does not exist, create one
+;;      $ mkdir ~/.emacs.d
+;; 2. Copy this highlighting definition to the previous dir
+;;      $ cp madx.el ~/.emacs.d/
+;; 3. Create or modify your ~/.emacs.d/.emacs config file with the
+;;    following block :
+;; ;;;;;START OF BLOCK TO COPY AND UNCOMMENT 
+;; ;; ;;;; Enable syntax highlighting
+;; ;; (global-font-lock-mode t)
+;; ;; (setq font-lock-maximum-decoration t)
+;; ;; ;; add madx highlighting
+;; ;; (add-to-list 'load-path "~/.emacs.d")
+;; ;; (autoload 'madx-mode "madx" "MADX-mode" t)
+;; ;; (setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
+;; ;;   auto-mode-alist))
+;; ;;;;;END OF BLOCK TO COPY AND UNCOMMENT 
+
+;;;Installation for emacs v 21.X.X:
+;; 1-3. Do steps 1 to 3 in for emacs v 23.X.X
+;; 4. Do a symbolic link to the config file
+;;      $ ln -s ~/.emacs.d/.emacs ~/.emacs
+
+;;;USAGE
+
+;; Automatically loads highlighting for ".madx" files.
+;; If you want to highlight another buffer with this syntax,
+;; just do in emacs
+;;   M+X madx-mode
+;; where M is the meta character (or ALT!?)
+
+;; HISTORY
+;; v 1.0 First release at CERN. File is also available in the 
+;;       MAD-X sources "syntax" folder.
+;; v 1.1 Adding comments and changing some verbosed names
 
 ;;; Code:
 
@@ -159,14 +199,14 @@
    '("\\(->\\|:=\\)"
   . font-lock-warning-face)
   )
-  "Highlighting expressions for MAD-X mode (variables_madx).")
+  "Highlighting expressions for MAD-X mode (special-operators).")
 
 (defconst madx-font-lock-special_constants
   (list
    '("\\(#[es]\\)"
   . font-lock-constant-face)
   )
-  "Highlighting expressions for MAD-X mode (variables_madx).")
+  "Highlighting expressions for MAD-X mode (special-constants).")
 
 
 (defconst madx-font-lock-keywords-3
@@ -199,7 +239,7 @@
 (defvar madx-mode-syntax-table
   (let ((madx-mode-syntax-table (make-syntax-table)))
 	
-    ; This is added so entity names with unde rscores can be more easily parsed
+    ; This is added so entity names with underscores can be more easily parsed
 	(modify-syntax-entry ?_ "w" madx-mode-syntax-table)
 	(modify-syntax-entry ?. "w" madx-mode-syntax-table)
 	
@@ -232,4 +272,3 @@
 (provide 'madx-mode)
 
 ;;; madx-mode.el ends here
-
