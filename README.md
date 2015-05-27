@@ -1,7 +1,7 @@
 mad-x_syntax
 ============
 
-MAD-X syntax highlighting.
+MAD-X syntax highlighting, madx-el.
 
 This is a development area (which has been stable for long time).
 You can find this and other MAD-X highlighting implementations
