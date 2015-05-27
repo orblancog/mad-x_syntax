@@ -57,6 +57,8 @@
 ;; 4. Do a symbolic link to the config file
 ;;      $ ln -s ~/.emacs.d/.emacs ~/.emacs
 
+;; You should now restart emacs in order to reload the environment variables.
+
 ;;;USAGE
 
 ;; Automatically loads highlighting for ".madx" files.
