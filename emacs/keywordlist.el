@@ -1,60 +1,118 @@
-;; This is the list of keywords to highlight
+;; oblancog
+;; This is the list of keywords to highlight in madx
 ;; They have been splitted by cathegory
 ;;
 ;; The reg. expression obtained from evaluating each regexp optimization
-;;   is to be included in the madx.el file to speed up highlighting 
+;;   is included in the madx.el file to speed up highlighting
+;; Now, some useful commands
+;; M+X : ielm ; to open the interactive lisp module
+;; 
+;;
+;; Changes
+;; 2016.08 Cross checking with MAD-X 5.02.10 manual
 
-(regexp-opt '("TWISS" "LINE" "MAKETHIN" "APERTURE"))
-
-(regexp-opt '(
-":="
-"->"
+(regexp-opt '(;; font-lock-keyword-face
+;; madx-font-lock-keywords-programflow
+        "IF"
+        "ELSEIF"
+        "ELSE"
+        "WHILE"
+        "MACRO"
 ) t)
-(regexp-opt '(
-"#e"
-"#s"
-) t)
 
-
-(regexp-opt '(
-        "ASSIGN"
-        "CALL"
-        "COGUESS"
-        "CREATE"
-        "DELETE"
-        "DUMPSEQU"
-        "EXEC"
+(regexp-opt '(;; font-lock-builtin-face
+;; madx-font-lock-keywords-controlstm              
         "EXIT"
-        "FILL"
-        "HELP"
-        "OPTION"
-        "PRINT"
         "QUIT"
-        "READTABLE"
-        "READMYTABLE"
-        "RESBEAM"
-        "RETURN"
-        "SAVE"
-        "SAVEBETA"
-        "SELECT"
-        "SET"
-        "SHOW"
         "STOP"
+        "HELP"
+        "SHOW"
+        "VALUE"
+        "OPTION"
+        "EXEC"
+        "SET"
         "SYSTEM"
-        "TABSTRING"
         "TITLE"
         "USE"
-        "VALUE"
+        "SELECT"
+;;  madx-font-lock-keywords-filehandstm
+        "ASSIGN"
+        "CALL"
+        "RETURN"
+        "PRINT"
+        "PRINTF"
+        "RENAMEFILE"
+        "COPYFILE"
+        "REMOVEFILE"
+;;  madx-font-lock-keywords-tablehandstm
+        "CREATE"
+        "DELETE"
+        "READTABLE"
+        "READMYTABLE"
         "WRITE"
-        "CONST"
         "SETVARS"
+        "SETVARS_LIN"
+        "FILL"
+        "SHRINK"
+;;  madx-font-lock-keywords-beamhandstm
+        "BEAM"
+        "RESBEAM"
+;; madx-font-lock-keywords-seqediting
+        "SEQEDIT"
+        "FLATTEN"
+        "CYCLE"
+        "REFLECT"
+        "INSTALL"
+        "MOVE"
+        "REMOVE"
+        "REPLACE"
+        "EXTRACT"
+        "ENDEDIT"
+        "SAVE"        
+        "DUMPSEQU"
+;; madx-font-lock-keywords-othrcmds
+        "SAVEBETA"
+        "COGUESS"
+        "CONST"
         "EOPTION"
         "ESAVE"
         "REAL"
+;; madx-font-lock-keywords-matchingmet
+        "LMDIF"
+        "MIGRAD"
+        "SIMPLEX"
+        "JACOBIAN"
+        "USE_MACRO"
+;; madx-font-lock-keywords-orbit_corr
+        "CORRECT "
+        "USEMONITOR"
+        "USEKICK"
+        "CSAVE"
+        "SETCORR"
+        "COPTION"
+        "SODD"
+        "SURVEY"
+        "SXFREAD"
+        "SXFWRITE"
+        "TOUSCHEK"
+        "TRACK"
+        "ENDTRACK"
+;; madx-font-lock-keywords-plot
+        "PLOT"
+        "RPLOT"
+        "RVIEWER"
+        "RTRACKSTORE"
+        "RESPLOT"
+        "SETPLOT"
+        "EPRINT"
+;; madx-font-lock-keywords-stringatt
+        "TITLE"
+        "system"
 ) t)
 
-(regexp-opt '(
-	"DRIFT"
+(regexp-opt '(; font-lock-type-face
+;; madx-font-lock-keywords-elements
+    	"DRIFT"
         "QUADRUPOLE"
         "SEXTUPOLE"
         "OCTUPOLE"
@@ -63,47 +121,92 @@
         "RFCAVITY"
         "DIPEDGE"
         "MULTIPOLE"
+        "COLLIMATOR"
         "ECOLLIMATOR"
         "RCOLLIMATOR"
         "YROTATION"
         "SROTATION"
+        "TRANSLATION"
+        "CHANGEREF"
         "MARKER"
         "RBEND"
         "SBEND"
+        "DIPEDGE"
         "HKICKER"
         "VKICKER"
         "KICKER"
+        "TKICKER"
         "ELSEPARATOR"
         "HMONITOR"
         "VMONITOR"
         "MONITOR"
         "INSTRUMENT"
+        "PLACEHOLDER"
         "BEAMBEAM"
         "MATRIX"
+        "NLLENS"
+        "RFMULTIPOLE"
 ) t)
 
-(regexp-opt '(
-        "IF"
-        "ELSEIF"
-        "ELSE"
-        "WHILE"
-        "MACRO"
+(regexp-opt '(; font-lock-warning-face
+;; madx-font-lock-special_operators
+       ":="
+       "->"
+;; madx-font-lock-keywords-errordef
+       "ERROR"
+       "EALIGN"
+       "EFCOMP"
+       "SETERR"
 ) t)
 
-(regexp-opt '(
-  "BEAM"
-  "RESBEAM"
-) t)
-(regexp-opt '(
-        "LMDIF"
-        "MIGRAD"
-        "SIMPLEX"
-        "JACOBIAN"
-        "USE_MACRO"
+(regexp-opt '(; font-lock-constant-face
+;; madx-font-lock-special_constants
+       "#e"
+       "#s"
+;; madx-font-lock-keywords-constants
+        "POSITRON"
+        "ELECTRON"
+        "PROTON"
+        "ANTIPROTON"
+        "POSMUON"
+        "NEGMUON"
+        "PI"
+        "TWOPI"
+        "DEGRAD"
+        "RADDEG"
+        "E"
+        "EMASS"
+        "PMASS"
+        "MUMASS"
+        "CLIGHT"
+        "QELECT"
+        "TRUE"
+        "FALSE"
+        "SIMPLE"
+        "COLLIM"
+        "TEAPOT"
+        "ENTRY"
+        "CENTRE"
+        "EXIT"
+        "CIRCLE"
+        "RECTANGLE"
+        "ELLIPSE"
+        "LHCSCREEN"
+        "MARGUERITE"
+        "RECTELLIPSE"
+        "RACETRACK"
 ) t)
 
-(regexp-opt '(
-        "TWISS" "LINE" "MAKETHIN" "APERTURE"
+(regexp-opt '(;; font-lock-doc-face
+;;  madx-font-lock-keywords-tableaccs
+        "TABLE"
+        "TABINDEX"
+        "TABSTRING"
+;; madx-font-lock-keywords-simul
+        "TWISS"
+        "LINE"
+        "MAKETHIN"
+        "APERTURE"
         "SIXTRACK"
         "DYNAP"
         "EMIT"
@@ -149,46 +252,13 @@
         "PTC_SETTOTALPATH"
         "PTC_SETTIME"
         "PTC_SETFRINGE "
-) t)
-
-
-(regexp-opt '(
-"CORRECT "
-        "USEMONITOR"
-        "USEKICK"
-        "CSAVE"
-        "SETCORR"
-        "COPTION"
-        "SODD"
-        "SURVEY"
-        "SXFREAD"
-        "SXFWRITE"
-        "TOUSCHEK"
-        "TRACK"
-        "ENDTRACK"
-
-) t)
-(regexp-opt '(
-        "PLOT"
-        "RPLOT"
-        "RVIEWER"
-        "RTRACKSTORE"
-        "RESPLOT"
-        "SETPLOT"
-        "EPRINT"
-) t)
-
-(regexp-opt '(
-        "SEQEDIT"
-        "FLATTEN"
-        "INSTALL"
-        "MOVE"
-        "REMOVE"
-        "CYCLE"
-        "REFLECT"
-        "ENDEDIT"
-
-(regexp-opt '(
+;; madx-font-lock-keywords-parameters
+        "KNLL" ;2016.08
+        "CNLL" ;2016.08
+        "SINKICK"
+        "SINPEAK"
+        "SINTUNE"
+        "SINPHASE"
         "L"
         "K1"
         "K1S"
@@ -305,6 +375,7 @@
         "WIDTH"
         "BBDIR"
         "ECHO"
+        "ECHOMACRO"
         "TRACE"
         "VERIFY"
         "PERIOD"
@@ -319,7 +390,6 @@
         "PARAMETRIC"
         "CLEAR"
         "POS"
-        "TABLE"
         "COLUMN"
         "POLYNOMIAL"
         "MONOMIAL"
@@ -329,6 +399,8 @@
         "SEED"
         "ADD"
         "INFO"
+        "DEBUG"
+        "VERBOSE"
         "TELL"
         "RESET"
         "WARN"
@@ -347,6 +419,7 @@
         "BARS"
         "SYMBOL"
         "NOVERSION"
+        "NO_FATAL_ERROR"
         "INTERPOLATE"
         "NOLINE"
         "NOTITLE"
@@ -523,55 +596,8 @@
         "USE_PTCKNOBS"
 ) t)
 
-
-(regexp-opt '(
-       "ERROR"
-       "EALIGN"
-       "EFCOMP"
-       "SETERR"
-
-) t)
-
-(regexp-opt '(
-
-        "POSITRON"
-        "ELECTRON"
-        "PROTON"
-        "ANTIPROTON"
-        "POSMUON"
-        "NEGMUON"
-        "PI"
-        "TWOPI"
-        "DEGRAD"
-        "RADDEG"
-        "E"
-        "EMASS"
-        "PMASS"
-        "MUMASS"
-        "CLIGHT"
-        "QELECT"
-        "TRUE"
-        "FALSE"
-        "SIMPLE"
-        "COLLIM"
-        "TEAPOT"
-        "ENTRY"
-        "CENTRE"
-        "EXIT"
-        "CIRCLE"
-        "RECTANGLE"
-        "ELLIPSE"
-        "LHCSCREEN"
-        "MARGUERITE"
-        "RECTELLIPSE"
-        "RACETRACK"
-) t)
-
-(regexp-opt '(
-        "TITLE"
-        "system"
-) t)
-(regexp-opt '(
+(regexp-opt '(;;  font-lock-function-name-face
+;; madx-font-lock-keywords-functions
         "SQRT"
         "LOG"
         "LOG10"
@@ -591,8 +617,12 @@
         "TGAUSS"
 ) t)
 
-(regexp-opt '(
 
+(regexp-opt '(;; font-lock-variable-name-face
+;; madx-font-lock-keywords-variables_madx
+        "Z"
+        "PHI"
+        "PSI"
         "X"
         "Y"
         "BETX"
@@ -603,6 +633,7 @@
         "R[1-6][1-6]"
         "RM[1-6][1-6]"
         "K[1-6]"
+        "K[1-6]L"
         "KICK[1-6]"
         "BETA[1-3][1-3]"
         "BETA[1-3][1-3]P"

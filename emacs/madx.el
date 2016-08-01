@@ -1,9 +1,10 @@
 ;;; madx-mode-el -- Major mode for editing MAD-X files
 
-;; Author: Oscar Roberto Blanco Garcia 
-;; email : <oscar.roberto.blanco.garcia@cern.ch>
-;; version: 1.1
-;; Created: 21.05.2015
+;; oblancog
+;; Author: Oscar Roberto BLANCO-GARCIA
+;; email : <orblancog@gmail.com>
+;; version: 1.2
+;; Created: 2016.08
 ;; Keywords: MAD-X major-mode
 
 ;; This program is free software; you can redistribute it and/or
@@ -41,7 +42,7 @@
 ;;      $ cp madx.el ~/.emacs.d/
 ;; 3. Create or modify your ~/.emacs.d/.emacs config file with the
 ;;    following block :
-;; ;;;;;START OF BLOCK TO COPY AND UNCOMMENT 
+;; ;; ;;;START OF BLOCK TO COPY AND UNCOMMENT 
 ;; ;; ;;;; Enable syntax highlighting
 ;; ;; (global-font-lock-mode t)
 ;; ;; (setq font-lock-maximum-decoration t)
@@ -50,7 +51,7 @@
 ;; ;; (autoload 'madx-mode "madx" "MADX-mode" t)
 ;; ;; (setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
 ;; ;;   auto-mode-alist))
-;; ;;;;;END OF BLOCK TO COPY AND UNCOMMENT 
+;; ;; ;;;END OF BLOCK TO COPY AND UNCOMMENT 
 
 ;;;Installation for emacs v 21.X.X:
 ;; 1-3. Do steps 1 to 3 in for emacs v 23.X.X
@@ -60,7 +61,6 @@
 ;; You should now restart emacs in order to reload the environment variables.
 
 ;;;USAGE
-
 ;; Automatically loads highlighting for ".madx" files.
 ;; If you want to highlight another buffer with this syntax,
 ;; just do in emacs
@@ -71,6 +71,7 @@
 ;; v 1.0 First release at CERN. File is also available in the 
 ;;       MAD-X sources "syntax" folder.
 ;; v 1.1 Adding comments and changing some verbosed names
+;; v 1.2 Adding some variables from MAD-X 5.02.10 manual
 
 ;;; Code:
 
@@ -81,13 +82,22 @@
 
 (defvar madx-mode-hook nil)
 
-;(defvar madx-mode-map
-;  (let ((madx-mode-map (make-keymap)))
-;    (define-key madx-mode-map "\C-j" 'newline-and-indent)
-;    madx-mode-map)
-;  "Keymap for MAD-X major mode")
 
 (add-to-list 'auto-mode-alist '("\\.madx\\'" . madx-mode))
+
+;; add  80 characters line
+;;(global-whitespace-mode +1)
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'madx-mode-hook 'whitespace-mode)
+
+(defconst madx-font-lock-keywords-programflow
+  (list
+  '("\\<\\(ELSE\\(?:IF\\)?\\|IF\\|MACRO\\|WHILE\\)\\>"
+  . font-lock-keyword-face)
+  )
+  "Highlighting expressions for MAD-X mode (programflow).")
 
 (defconst madx-font-lock-keywords-simul
   (list
@@ -96,13 +106,6 @@
  . font-lock-builtin-face)
  )
  "Highlighting expressions for MAD-X mode (simul).")
-
-(defconst madx-font-lock-keywords-programflow
-  (list
-  '("\\<\\(ELSE\\(?:IF\\)?\\|IF\\|MACRO\\|WHILE\\)\\>"
-  . font-lock-keyword-face)
-  )
-  "Highlighting expressions for MAD-X mode (programflow).")
 
 (defconst madx-font-lock-keywords-controlstm
   (list
@@ -213,11 +216,11 @@
 
 (defconst madx-font-lock-keywords-3
   (append 
+     madx-font-lock-keywords-programflow
+     madx-font-lock-keywords-controlstm
      madx-font-lock-special_operators
      madx-font-lock-special_constants
-     madx-font-lock-keywords-programflow
      madx-font-lock-keywords-simul
-     madx-font-lock-keywords-controlstm
      madx-font-lock-keywords-elements
      madx-font-lock-keywords-beamspec
      madx-font-lock-keywords-matchingmet
