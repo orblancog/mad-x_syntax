@@ -84,9 +84,9 @@ sin
   SIG66 := ESPRD*ESPRD;
   C61   := SIG61/SQRT(SIG11*SIG66);
   C62   := SIG62/SQRT(SIG22*SIG66);
-!  SIG0  : SIGMA0, SIGX=SQRT(SIG11), SIGPX=SQRT(SIG22), R21=C21, &
-!                  SIGY=SQRT(SIG33), SIGPY=SQRT(SIG44), R43=C43, &
-!                  SIGT=BLENG      , SIGPT=ESPRD      , R61=C61, R62=C62
+  SIG0  : SIGMA0, SIGX=SQRT(SIG11), SIGPX=SQRT(SIG22), R21=C21, &
+                  SIGY=SQRT(SIG33), SIGPY=SQRT(SIG44), R43=C43, &
+                  SIGT=BLENG      , SIGPT=ESPRD      , R61=C61, R62=C62
 
 clight
 betx.se
@@ -98,6 +98,7 @@ mu11
 betx
 ALFa12p
 aper_5
+    name,r11
 
 ->
 ! ==============================================================================

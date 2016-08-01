@@ -18,7 +18,7 @@
         "ELSE"
         "WHILE"
         "MACRO"
-) t)
+) 'words)
 
 (regexp-opt '(;; font-lock-builtin-face
 ;; madx-font-lock-keywords-controlstm              
@@ -108,7 +108,7 @@
 ;; madx-font-lock-keywords-stringatt
         "TITLE"
         "system"
-) t)
+) 'words)
 
 (regexp-opt '(; font-lock-type-face
 ;; madx-font-lock-keywords-elements
@@ -146,23 +146,29 @@
         "MATRIX"
         "NLLENS"
         "RFMULTIPOLE"
-) t)
+) 'words)
 
 (regexp-opt '(; font-lock-warning-face
 ;; madx-font-lock-special_operators
        ":="
        "->"
+       ) t)
+
+(regexp-opt '(; font-lock-warning-face
 ;; madx-font-lock-keywords-errordef
        "ERROR"
        "EALIGN"
        "EFCOMP"
        "SETERR"
-) t)
+) 'words)
 
 (regexp-opt '(; font-lock-constant-face
 ;; madx-font-lock-special_constants
        "#e"
        "#s"
+) t)
+
+(regexp-opt '(; font-lock-constant-face
 ;; madx-font-lock-keywords-constants
         "POSITRON"
         "ELECTRON"
@@ -177,9 +183,13 @@
         "E"
         "EMASS"
         "PMASS"
+        "NMASS"
         "MUMASS"
         "CLIGHT"
         "QELECT"
+        "HBAR"
+        "ERAD"
+        "PRAD"
         "TRUE"
         "FALSE"
         "SIMPLE"
@@ -195,7 +205,7 @@
         "MARGUERITE"
         "RECTELLIPSE"
         "RACETRACK"
-) t)
+) 'words)
 
 (regexp-opt '(;; font-lock-doc-face
 ;;  madx-font-lock-keywords-tableaccs
@@ -352,6 +362,8 @@
         "FILE"
         "FORMAT"
         "RBARC"
+        "TWISS_PRINT"
+        "THREADER"
         "THIN_FOC"
         "NO_FATAL_STOP"
         "TEXT"
@@ -420,6 +432,7 @@
         "SYMBOL"
         "NOVERSION"
         "NO_FATAL_ERROR"
+        "NO_FATAL_STOP"
         "INTERPOLATE"
         "NOLINE"
         "NOTITLE"
@@ -594,7 +607,7 @@
         "AUTOPLACEDOWNSTREAM"
         "REFFRAME"
         "USE_PTCKNOBS"
-) t)
+) 'words)
 
 (regexp-opt '(;;  font-lock-function-name-face
 ;; madx-font-lock-keywords-functions
@@ -611,11 +624,17 @@
         "SINH"
         "COSH"
         "TANH"
+        "SINC"
         "ABS"
+        "ERF"
+        "ERFC"
+        "FLOOR"
+        "CEIL"
+        "ROUND"
         "RANF"
         "GAUSS"
         "TGAUSS"
-) t)
+) 'words)
 
 
 (regexp-opt '(;; font-lock-variable-name-face
@@ -637,8 +656,10 @@
         "KICK[1-6]"
         "BETA[1-3][1-3]"
         "BETA[1-3][1-3]P"
+        "ALFA"
         "ALFA[1-3][1-3]"
         "ALFA[1-3][1-3]P"
+        "GAMMATR"
         "GAMA[1-3][1-3]"
         "GAMA[1-3][1-3]P"
         "DISP[1-4]"
@@ -701,4 +722,26 @@
         "YTOL"
         "ON_AP"
         "ON_ELEM"
-) t)
+        "LENGTH"
+        "ORBIT5"
+        "BETXMAX"
+        "DXMAX"
+        "DXRMS"
+        "XCOMAX"
+        "XRMS"
+        "BETYMAX"
+        "DYMAX"
+        "DYRMS"
+        "YCOMAX"
+        "YCORMS"
+        "SYNCH_1"
+        "SYNCH_2"
+        "SYNCH_3"
+        "SYNCH_4"
+        "SYNCH_5"
+        "DISTANCE"
+        "LYAPUNOV"
+        "LOGDIST"
+        "LOGTURNS"
+        
+) 'words)
