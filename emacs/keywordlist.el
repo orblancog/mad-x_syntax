@@ -265,6 +265,7 @@
 ;; madx-font-lock-keywords-parameters
         "KNLL" ;2016.08
         "CNLL" ;2016.08
+        "MAKEDIPEDGE"
         "SINKICK"
         "SINPEAK"
         "SINTUNE"
@@ -649,6 +650,11 @@
         "NAME"
         "S"
         "R"
+        "k0l"
+        "k1l"
+        "k2l"
+        "k3l"
+        "k4l"
         "R[1-6][1-6]"
         "RM[1-6][1-6]"
         "K[1-6]"
