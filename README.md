@@ -1,18 +1,26 @@
 mad-x_syntax
 ============
 
-MAD-X syntax highlighting for emacs, madx-el.
+MAD-X syntax highlighting for emacs.
+Check the "madx.el" file for installation instructions
 
-iThis is a development area (which has been stable for long time).
-    
-You can find this and other MAD-X highlighting implementations
-  (emacs, KATE+KWRITE, VIM)
+FEATURES (v 1.2)
+
+* Highlights special variable names and commands
+* Automatically highlights '.madx' files,
+* any other buffer can be highlighted with this major mode doing :
+*   M+X madx-mode
+* where M is the META character in Emacs (M seems to be ALT ???)
+* Update to MAD-X 5.2.XX command list
+
+   
+You can find this and other MAD-X highlighting implementations, e.g.
+  emacs, KATE+KWRITE, VIM
 inside the syntax folder in the madx sources
-    
-svnweb.cern.ch/world/wsvn/madx/
+[svnweb.cern.ch/world/wsvn/madx](svnweb.cern.ch/world/wsvn/madx)
 
-Do not forget to see 
-mad.web.cern.ch/mad/
+Do not forget to visit 
+[mad.web.cern.ch/mad](mad.web.cern.ch/mad)
 
 ø
     
