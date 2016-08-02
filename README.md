@@ -7,10 +7,10 @@ Check the "madx.el" file for installation instructions
 FEATURES (v 1.2)
 
 * Highlights special variable names and commands
-* Automatically highlights '.madx' files,
-* any other buffer can be highlighted with this major mode doing :
-*   M+X madx-mode
-* where M is the META character in Emacs (M seems to be ALT ???)
+* Automatically highlights '.madx' files,  
+  Any other buffer can be highlighted :
+    `M+X madx-mode`
+  where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 * Update to MAD-X 5.2.XX command list
 
    
