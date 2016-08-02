@@ -8,7 +8,7 @@ FEATURES (v 1.2)
 
 * Highlights special variable names and commands
 * Automatically highlights '.madx' files,  
-  Any other buffer can be highlighted :  
+  and any buffer can be highlighted by doing :  
     `M+X madx-mode`  
   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 * Update to MAD-X 5.2.XX command list
