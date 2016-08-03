@@ -1,17 +1,42 @@
 ! This is a test file. NOT A PROPER MAD-X FILE!!!
 ! Its purpose is to contain MAD-X instruction in order to test how are
 !   they highlighted
-
+dipedge
+        multipole
+    monitor
+    beam 
 
   TITLE, "ATF2 Optics (v3.8)";
+
+
+re62 re37
+t622 t722
+tm611 tm627
+beta33 beta43
+alfa22 alfa44
+    gamma gamay 
+gama21p gamax alfx betx gamax gamma11 gamma11p 
+DISP1 disp1p3 disp3p5
+    eign11
+    r11, r66 r67
+    re11 r66 r77
+    rm11 r66 r77
+    
 
 /*
 ! ==============================================================================
 ! initial conditions (entrance to DR extraction kicker)
 ! ------------------------------------------------------------------------------
 */
-// comment 
-IF 
+// comment
+ef 
+IF
+    if 
+macro,
+beta13p
+beta11
+
+    
 assign
 
 ealign 
@@ -29,6 +54,7 @@ ealign
 
 cos
 sin
+gauss
 
   TITLE, 'OTR"o"OTIT';
   TITLE, 'OTRO';
@@ -97,7 +123,7 @@ T123
 mu11
 betx
 ALFa12p
-aper_5
+aper_5 rtol xtol aper_4
     name,r11
 
 ->

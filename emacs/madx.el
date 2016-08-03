@@ -88,7 +88,7 @@
 (defconst madx-font-lock-keywords-face-all
   ;; madx-font-lock-keywords-programflow
   (list
-  '("\\<\\(ELSE\\(?:IF\\)?\\|IF\\|MACRO\\|WHILE\\)\\>"
+   '("\\<\\(ELSE\\(?:IF\\)?\\|IF\\|MACRO\\|WHILE\\)\\>"
    .  font-lock-keyword-face)
   )
   "Highlighting expressions for MAD-X mode (keywords-all).")
@@ -171,7 +171,7 @@
 (defconst madx-font-lock-variable-name-face-all
   ;; madx-font-lock-keywords-variables_madx
   (list
-   '("\\<\\(A\\(?:LF\\(?:A\\(?:[1-3]\\(?:[1-3]P\\|[1-3]\\)\\|[1-3]\\(?:[1-3]P\\|[1-3]\\)\\)\\|[AXY]\\)\\|PER_[1-4]\\|RAD\\)\\|BET\\(?:A\\(?:1\\(?:[1-3]P\\|[1-3]\\)\\|2\\(?:[1-3]P\\|[1-3]\\)\\)\\|[XY]MAX\\|[XY]\\)\\|CIRC\\|D\\(?:D\\(?:P[XY]\\|Q[12]\\|[XY]\\)\\|ELTAP\\|IS\\(?:P\\(?:[1-4]P[1-4]\\|[1-4]P[1-4]\\|[1-4]\\)\\|TANCE\\)\\|MU[XY]\\|P[XY]\\|Q[12]\\|TBYDS\\|X\\(?:MAX\\|RMS\\)\\|Y\\(?:MAX\\|RMS\\)\\|[XY]\\)\\|E\\(?:IGN\\(?:1[12]\\|2[12]\\)\\|NERGY\\)\\|FREQ0\\|GAM\\(?:A\\(?:1\\(?:[12]P\\|[12]\\)\\|2\\(?:[12]P\\|[12]\\)\\)\\|MATR\\)\\|K\\(?:1L\\|2L\\|3L\\|4L\\|5L\\|6L\\|ICK[1-6]\\|[1-6]\\)\\|L\\(?:ENGTH\\|OG\\(?:DIST\\|TURNS\\)\\|YAPUNOV\\)\\|MU[123XY]\\|N\\(?:1\\(?:MIN\\|[XY]_M\\)?\\|AME\\)\\|O\\(?:N_\\(?:AP\\|ELEM\\)\\|RBIT5\\)\\|P\\(?:DAMP\\|HI[TXY]?\\|SI\\|[TXY]N\\|[TXY]\\)\\|Q[12S]\\|R\\(?:1[12]\\|2[12]\\|E\\(?:1[12]\\|2[12]\\)?\\|M\\(?:1[12]\\|2[12]\\)\\|TOL\\)\\|SYNCH_[1-5]\\|T\\(?:1\\(?:1[12]\\|2[12]\\)\\|2\\(?:1[12]\\|2[12]\\)\\|HETA\\|M\\(?:1\\(?:1[12]\\|2[12]\\)\\|2\\(?:1[12]\\|2[12]\\)\\)\\|N\\)\\|U0\\|W[TXY]\\|X\\(?:COMAX\\|N\\|RMS\\|TOL\\)\\|Y\\(?:CO\\(?:MAX\\|RMS\\)\\|N\\|TOL\\)\\|k\\(?:[0-4]l\\)\\|mvar[1-4]\\|[RSTXYZ]\\)\\>"
+   '("\\<\\(A\\(?:LF\\(?:A[1-3][1-3]P?\\|[AXY]\\)\\|PER_[1-4]\\|RAD\\)\\|BET\\(?:A[1-3][1-3]P?\\|[XY]MAX\\|[XY]\\)\\|CIRC\\|D\\(?:D\\(?:P[XY]\\|Q[12]\\|[XY]\\)\\|ELTAP\\|\IS\\(?:P\\(?:[1-4]P[1-3]\\|[1-4]\\)\\|TANCE\\)\\|MU[XY]\\|P[XY]\\|Q[12]\\|TBYDS\\|X\\(?:MAX\\|RMS\\)\\|Y\\(?:MAX\\|RMS\\)\\|[XY]\\)\\|E\\(?:IGN[1-6][1-6]\\|NERGY\\)\\\|FREQ0\\|GAM\\(?:A\\(?:[1-3][1-3]P?\\|[XY]\\)\\|MA\\(?:[1-3][1-3]\\|TR\\)\\)\\|K\\(?:1L\\|2L\\|3L\\|4L\\|5L\\|6L\\|ICK[1-6]\\|[1-6]\\)\\|L\\(?:ENGTH\\|OG\\(?:DIST\\\|TURNS\\)\\|YAPUNOV\\)\\|MU[123XY]\\|N\\(?:1\\(?:MIN\\|[XY]_M\\)?\\|AME\\)\\|O\\(?:N_\\(?:AP\\|ELEM\\)\\|RBIT5\\)\\|P\\(?:DAMP\\|HI[TXY]?\\|SI\\|[TXY\]N\\|[TXY]\\)\\|Q[12S]\\|R\\(?:[1-6][1-6]\\|E\\(?:[1-6][1-6]\\)?\\|M[1-6][1-6]\\|TOL\\)\\|SYNCH_[1-5]\\|T\\(?:[1-6][1-6][1-6]\\|HETA\\|M[1-6][1-6][1-6]\\|N\\)\\|U0\\|W[TXY]\\|X\\(?:COMAX\\|N\\|RMS\\\|TOL\\)\\|Y\\(?:CO\\(?:MAX\\|RMS\\)\\|N\\|TOL\\)\\|k\\(?:[0-4]l\\)\\|mvar[1-4]\\|[RSTXYZ]\\)\\>"
      . font-lock-variable-name-face)
    )
   "Highlighting expressions for MAD-X mode (variable-name-all).")

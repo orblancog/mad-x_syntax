@@ -5,8 +5,9 @@
 ;; The reg. expression obtained from evaluating each regexp optimization
 ;;   is included in the madx.el file to speed up highlighting
 ;; Now, some useful commands
-;; M+X : ielm ; to open the interactive lisp module
-;; 
+;; M+X ielm ; to open the interactive lisp module
+;; M+X unload-feature RET madx-mod ; to unload the mode
+;; M*X madx-mode ; to load the mode
 ;;
 ;; Changes
 ;; 2016.08 Cross checking with MAD-X 5.02.10 manual
@@ -730,20 +731,11 @@
         "BETY"
         "NAME"
         "S"
-        "R"
         "k0l"
         "k1l"
         "k2l"
         "k3l"
         "k4l"
-        "R11";; REPLACE BY R[1-6][1-6] AFTER REGEXP-OPT
-        "R12"
-        "R21"
-        "R22"
-        "RM11"
-        "RM12"
-        "RM21"
-        "RM22";; REPLACE BY RM[1-6][1-6] AFTER REGEXP-OPT
         "K1"
         "K2"
         "K3"
@@ -762,44 +754,6 @@
         "KICK4"
         "KICK5"
         "KICK6"
-        "BETA11"
-        "BETA12"
-        "BETA21"
-        "BETA22"; REPLACE BY BETA[1-3][1-3]
-        "BETA11P"
-        "BETA12P"
-        "BETA21P"
-        "BETA22P"; REPLACE BY BETA[1-3][1-3]P
-        "ALFA"
-        "ALFA11"
-        "ALFA12"
-        "ALFA21"
-        "ALFA22"; REPLACE BY ALFA[1-3][1-3]
-        "ALFA11P"
-        "ALFA12P"
-        "ALFA21P"
-        "ALFA22P"; REPLACE BY ALFA[1-3][1-3]P
-        "GAMMATR"
-        "GAMA11"
-        "GAMA12"
-        "GAMA21"
-        "GAMA22"; REPLACE BY GAMA[1-3][1-3]
-        "GAMA11P"
-        "GAMA12P"
-        "GAMA21P"
-        "GAMA22P"; REPLACE BY GAMA[1-3][1-3]P
-        "DISP1"
-        "DISP2"
-        "DISP3"
-        "DISP4"
-        "DISP1P1"
-        "DISP1P2"
-        "DISP2P1"
-        "DISP2P2"; REPLACE BY DISP[1-4]P[1-3]
-        "EIGN11"
-        "EIGN12"
-        "EIGN21"
-        "EIGN22"; REPLACE BY EIGN[1-6][1-6]
         "MU1"
         "MU2"
         "MU3"
@@ -807,23 +761,6 @@
         "MUY"
         "PX"
         "PY"
-        "T"
-        "T111"
-        "T112"
-        "T121"
-        "T122"
-        "T211"
-        "T212"
-        "T221"
-        "T222";; REPLACE BY T[1-6][1-6][1-6]
-        "TM111"
-        "TM112"
-        "TM121"
-        "TM122"
-        "TM211"
-        "TM212"
-        "TM221"
-        "TM222";; REPLACE BY T[1-6][1-6][1-6]
         "PT"
         "DELTAP"
         "XN"
@@ -853,11 +790,6 @@
         "DMUY"
         "DDY"
         "DDPY"
-        "RE"
-        "RE11"
-        "RE12"
-        "RE21"
-        "RE22";REPLACE BY RE[1-6][1-6]
         "Q1"
         "Q2"
         "DQ1"
@@ -896,5 +828,31 @@
         "DISTANCE"
         "LYAPUNOV"
         "LOGDIST"
-        "LOGTURNS"   
+        "LOGTURNS"
+        "RE"
+        "RE11";REPLACE BY RE[1-6][1-6]
+        "T"
+        "T111";; REPLACE BY T[1-6][1-6][1-6]
+        "TM111";; REPLACE BY TM[1-6][1-6][1-6]
+        "BETA11"; REPLACE BY BETA[1-3][1-3]
+        "BETA11P"; REPLACE BY BETA[1-3][1-3]P
+        "ALFA"
+        "ALFA11"; REPLACE BY ALFA[1-3][1-3]
+        "ALFA11P"; REPLACE BY ALFA[1-3][1-3]P
+        "GAMMATR"
+        "GAMAX"
+        "GAMAY"
+        "GAMA11"; REPLACE BY GAMA[1-3][1-3]
+        "GAMA11P"; REPLACE BY GAMA[1-3][1-3]P
+        "GAMMA11"; REPLACE BY GAMA[1-3][1-3]
+        "DISP1"
+        "DISP2"
+        "DISP3"
+        "DISP4"
+        "DISP1P1"; REPLACE BY DISP[1-4]P[1-3]
+        "EIGN11"; REPLACE BY EIGN[1-6][1-6]
+        "R"
+        "R11";; REPLACE BY R[1-6][1-6] AFTER REGEXP-OPT
+        "RM11";; REPLACE BY RM[1-6][1-6] AFTER REGEXP-OPT
+
 ) 'words)
