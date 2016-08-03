@@ -16,10 +16,10 @@ FEATURES (v 1.2)
 You can find this and other MAD-X highlighting implementations, e.g.
   emacs, KATE+KWRITE, VIM
 inside the syntax folder in the madx sources
-[http://svnweb.cern.ch/world/wsvn/madx](svnweb.cern.ch/world/wsvn/madx)
+[http://svnweb.cern.ch/world/wsvn/madx](http://svnweb.cern.ch/world/wsvn/madx)
 
 Do not forget to visit 
-[http://madx.web.cern.ch/madx](madx.web.cern.ch/madx)
+[http://madx.web.cern.ch/madx](http://madx.web.cern.ch/madx)
 
 ø
     
