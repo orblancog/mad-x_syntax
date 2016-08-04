@@ -268,6 +268,7 @@
         "RECTELLIPSE"
         "RACETRACK"
         "OCTAGON"
+	"TERMINAL"
 ) 'words)
 
 (regexp-opt '(;; font-lock-doc-face
