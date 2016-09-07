@@ -13,7 +13,7 @@ FEATURES (v 1.2)
     `M+X madx-mode`  
   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 * If the line is more than 80 characters long, the extra characters are 
-  highlighted differently. 
+  highlighted differently.  
   If you dont want this limit, comment/delete the line 
       (setq whitespace-line-column 80) ;; limit line length 
   in 'madx.el'. 
