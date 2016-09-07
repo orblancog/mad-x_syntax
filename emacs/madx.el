@@ -1,11 +1,15 @@
 ;;; madx-mode -- Major mode for editing MAD-X files in Emacs
 ;;; FEATURES (v 1.2)
-;;; -Highlights special variable names and commands
-;;; -Automatically highlights '.madx' files,
-;;;  any other buffer can be highlighted with this major mode doing :
-;;;      M+X madx-mode
-;;;  where M is the META character in Emacs (M seems to be ALT ???)
-;;; - Update to MAD-X 5.2.XX command list
+;; * Highlights commands, parameters and special operators in MAD-X 5.2.XX
+;; * If the file extension is '.madx' then the buffer is automatically highlighted,
+;;   but any buffer can be highlighted by doing :
+;;       `M+X madx-mode`
+;;   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
+;; * If the line is more than 80 characters long, the extra characters are
+;;   highlighted differently.
+;;   If you dont want this limit, comment/delete the line
+;;       (setq whitespace-line-column 80) ;; limit line length
+;;   in this file.
 
 ;;; LICENCE
 ;;    Copyright (C) 2016  Oscar BLANCO
@@ -29,12 +33,12 @@
 ;;    i.e.
 ;;      $ cp madx.el ~/.emacs.d/lisp/ 
 ;; 2. Edit/create your .emacs file, typically in ~/, adding
-;;    the following block :
+;;    the following block where the load-path must match point 1.
 ;;      ;;;; START OF BLOCK TO COPY AND UNCOMMENT 
 ;;      ;; Enable syntax highlighting
 ;;      (global-font-lock-mode t)
 ;;      (setq font-lock-maximum-decoration t)
-;;      ;; add madx highlighting
+;;      ;; add madx highlighting emacs v23.X.X
 ;;      (add-to-list 'load-path "~/.emacs.d")
 ;;      (autoload 'madx-mode "madx" "MADX-mode" t)
 ;;      (setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
