@@ -1,11 +1,11 @@
-mad-x_syntax
+mad-x\_syntax
 ============
 
 MAD-X syntax highlighting for emacs.  
 Check the "madx.el" file header for installation instructions.
 
 
-FEATURES (v 1.2)
+FEATURES (v 1.3)
 
 * Highlights commands, parameters and special operators in MAD-X 5.2.XX
 * If the file extension is '.madx' then the buffer is automatically highlighted,  

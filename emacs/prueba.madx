@@ -9,6 +9,41 @@ dipedge
   TITLE, "ATF2 Optics (v3.8)";
 
 
+! testing numbers
+cos(231e-3);
+32e-32.4a;
+32e-32
+25.3e-23 a;
+-2;+3;
+25.1e
+23e32u
+23e32
+.e32
+1e32
+31a
+a
+0
+1
+10
+10.1
+.2
+10.
+223.;a;   
+3.e g a ad
+3.e0
+34.3e234.6
+-34.5e-2.4
+3e.32;
+
+3 af
+3e3
+none = 0;
+lsf2 = 0.80000000000000004;
+.245
+32.
+q
+
+
 re62 re37
 t622 t722
 tm611 tm627
@@ -212,7 +247,7 @@ MATCH,USE_MACRO;
 ENDMATCH;
 
 !stop;   
-
+mad	 
 twiss, beta0=mline,  mux=0,muy=0, deltap=0.0,file="twiss",save;
 plot,colour=100,title="ATF2 2",haxis=s,vaxis1=betx,bety,vaxis2=dx;
 
