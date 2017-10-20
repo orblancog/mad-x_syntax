@@ -183,14 +183,9 @@
   ;; madx- fonts for integers and floating point numbers
   (list
    '("\\<\\(\\([0-9]+\\.?[0-9]*\\|\\.[0-9]+\\)\\([eE][+-]?\\([0-9]+\\.?[0-9]*\\|[0-9]*\\.[0-9]+\\)\\)?\\)\\>"
-;\\([e+]\\|[e+]\\|[e-]\\|[E+]\\)?\\)\\>"
-;\\([0-9]*[eE][0-9]+\\.?[0-9]+\\)?\\)\\>"
-;[eE]\\)\\)[0-9]+\\)*\\)\\>"
-;\\([eE][\\-+]?[0-9]+\\)?\\)\\>"
-;+\\([ulUL]+\\|[eE][\\-+]?[0-9]\\)?\\>"
-   . font-lock-keyword-face)
+     . font-lock-keyword-face)
    )
-)
+  "Highlighting expresssions for MAD-X mode (integers and floats)")
 
 (defconst madx-font-lock-keywords-4
   (append
