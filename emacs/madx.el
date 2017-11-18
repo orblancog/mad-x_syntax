@@ -215,7 +215,7 @@
      madx-mode-syntax-table)
   "Syntax table for `madx-mode'.")
 
-;;### autoload
+;;;###autoload
 (defun madx-mode ()
   "Major mode for editing MAD-X script files."
   (interactive)
