@@ -79,10 +79,11 @@
 
 ;;; Code:
 (defgroup madx nil
- "Major mode to edit MAD-X files in emacs"
+ "Major mode to edit MAD-X files in emacs."
  :group 'languages)
 
-(defvar madx-mode-hook nil)
+(defvar madx-mode-hook nil
+  "Hook for madx-model initialize nil.")
 
 ;(add-to-list 'auto-mode-alist '("\\.madx\\'" . madx-mode))
 
