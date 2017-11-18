@@ -22,60 +22,51 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-;;; FEATURES (v 1.3)
-;; * Highlights commands, parameters and special operators in MAD-X 5.2.XX 
+;;; Commentary:
+;; FEATURES in version 1.4
+;; * Highlights commands, parameters and special operators in MAD-X 5
 ;; * If the file extension is '.madx' then the buffer is automatically highlighted,
 ;;   but any buffer can be highlighted by doing :
 ;;       `M+X madx-mode`
 ;;   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
-;; * If the line is more than 80 characters long, the extra characters are
-;;   highlighted differently.
-;;   If you dont want this limit, comment/delete the line
-;;       (setq whitespace-line-column 80) ;; limit line length
-;;   in this file.
-
-;;; LICENCE
-;;    Copyright (C) 2016  Oscar BLANCO
-
-;;;INSTALLATION
-;; 1. Depending on your emacs version, copy this file (madx.el) to the
-;;    highlighting definition folder, e.g.
+;; * If the limit of 80 characters is desired, they could be highlighted differently
+;;   by uncomment the line
+;;       ;(require 'whitespace)
+;;       ;(setq whitespace-line-column 80) ;; limit line length
+;;       ;(setq whitespace-style '(face lines-tail))
+;;       ;(add-hook 'madx-mode-hook 'whitespace-mode)
+;;   in this (madx.el) file.
+;; HOW TO INSTALL IT
+;; For EMACS 2.4 and on it should be available in the EMACS elpa repository,
+;; otherwise,
+;; 1. Copy this file (madx.el) to the highlighting definition folder, e.g.
 ;;      a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X)
 ;;      b)  ~/.emacs.d/       ---> (Emacs v23.X.X)
 ;;      c)  ~/                ---> (Emacs v21.X.X)
 ;;    i.e.
-;;      $ cp madx.el ~/.emacs.d/lisp/ 
-;; 2. Edit or create your .emacs file, typically in ~/ 
+;;      $ cp madx.el ~/.emacs.d/lisp/
+;; 2. Edit or create your .emacs file, typically in ~/
 ;;      adding the following block where the load-path must match point 1.
-;;      ;;;; START OF BLOCK TO COPY AND UNCOMMENT 
+;;      ;;;; START OF BLOCK TO COPY AND UNCOMMENT
 ;;      (global-font-lock-mode t);; Enable syntax highlighting
 ;;      (setq font-lock-maximum-decoration t)
 ;;      (add-to-list 'load-path "~/.emacs.d");; <--- edit according to 1.
 ;;      (autoload 'madx-mode "madx" "MADX-mode" t)
 ;;      (setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
 ;;        auto-mode-alist))
-;;      ;;;; END OF BLOCK TO COPY AND UNCOMMENT 
-;; 3. You should now restart emacs in order to reload the environment variables.
-
-;;;INFO
-;; * Author: Oscar Roberto BLANCO GARCIA
-;;   email : oscar.blancogarcia@lnf.infn.it
-;;   version: 1.3
-;;   Created: XX102017 (ddmmyyyy)
-;;   Keywords: MAD-X major-mode
-;; * New code available at
-;;   https://github.com/orblancog/mad-x_syntax.git
+;;      ;;;; END OF BLOCK TO COPY AND UNCOMMENT
+;; 3. You should now restart EMACS in order to reload the environment variables.
+;; INFO
 ;; * For mad instructions, visit
 ;;   mad.web.cern.ch/mad/
 ;; * Other syntax highlightings could be found inside the
-;;   mad sources. Check the 'syntax' folder in the madx dir !
+;;   mad sources.  Check the 'syntax' folder in the madx dir !
 ;;   Write me to the email address above about any bug including an example.
 ;; * One good example to modify this mode :
 ;;   http://ergoemacs.org/emacs/elisp_syntax_coloring.html
 
-;;;HISTORY
-;; v 1.0 First release at CERN. File is also available in the 
+;;; History:
+;; v 1.0 First release at CERN. File is also available in the
 ;;       MAD-X sources "syntax" folder.
 ;; v 1.1 Adding comments and changing some verbosed names
 ;; v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated
@@ -83,16 +74,17 @@
 ;;       Cleaning up faces 8D
 ;;       when exceeding 80 chars->extra chars in red
 ;; v 1.3 adding color to numbers and ;
+;; v 1.4 Changes to put this file in the emacs elpa repository
+;;       Changing email address to orblancog@gmail.com
 
-;;; ... Finally the Code :
-
+;;; Code:
 (defgroup madx nil
  "Major mode to edit MAD-X files in emacs"
  :group 'languages)
 
 (defvar madx-mode-hook nil)
 
-(add-to-list 'auto-mode-alist '("\\.madx\\'" . madx-mode))
+;(add-to-list 'auto-mode-alist '("\\.madx\\'" . madx-mode))
 
 ;;;; add  80 characters line
 ;;;; (global-whitespace-mode +1)
@@ -121,7 +113,7 @@
   ;; madx-font-lock-keywords-orbit_corr
   ;; madx-font-lock-keywords-plot
   ;; madx-font-lock-keywords-stringatt
-  (list 
+  (list
   '("\\<\\(A\\(?:PERTURE\\|SSIGN\\)\\|BEAM\\|C\\(?:ALL\\|O\\(?:GUESS\\|NST\\(?:RAINT\\)?\\|P\\(?:TION\\|YFILE\\)\\|RRECT\\)\\|\\(?:REAT\\|SAV\\|YCL\\)E\\)\\|D\\(?:ELETE\\|UMPSEQU\\|YNAP\\)\\|E\\(?:MIT\\|ND\\(?:EDIT\\|MATCH\\|TRACK\\|_MATCH\\)\\|OPTION\\|PRINT\\|SAVE\\|X\\(?:EC\\|\\(?:I\\|TRAC\\)T\\)\\)\\|F\\(?:ILL\\|LATTEN\\)\\|G\\(?:LOBAL\\|WEIGHT\\)\\|HELP\\|I\\(?:BS\\|NSTALL\\)\\|JACOBIAN\\|L\\(?:INE\\|MDIF\\)\\|M\\(?:A\\(?:KETHIN\\|TCH\\(?: WITHPTCKNOBS\\)?\\)\\|IGRAD\\|OVE\\)\\|O\\(?:BSERVE\\|PTION\\)\\|P\\(?:LOT\\|RINTF?\\|TC_\\(?:ALIGN\\|CREATE_\\(?:LAYOUT\\|UNIVERSE\\)\\|DUMPMAPS\\|E\\(?:ND\\|PLACEMENT\\)\\|KNOB\\|MO\\(?:MENTS\\|VE_TO_LAYOUT\\)\\|NORMAL\\|OBSERVE\\|PRINT\\(?:FRAMES\\|PARAMETRIC\\)\\|READ_ERRORS\\|S\\(?:E\\(?:LECT\\(?:_MOMENT\\)?\\|T\\(?:ACCEL_METHOD\\|CAVITIES\\|DEBUGLEVEL\\|EXACTMIS\\|FRINGE\\|KNOBVALUE\\|RADIATION\\|SWITCH\\|T\\(?:IME\\|OTALPATH\\)\\)\\)\\|TART\\)\\|T\\(?:RACK\\(?:_\\(?:END\\|LINE\\)\\)?\\|WISS\\)\\|VARYKNOB\\)\\)\\|QUIT\\|R\\(?:E\\(?:A\\(?:D\\(?:\\(?:MY\\)?TABLE\\)\\|L\\)\\|FLECT\\|MOVE\\(?:FILE\\)?\\|NAMEFILE\\|PLACE\\|S\\(?:BEAM\\|PLOT\\)\\|TURN\\)\\|PLOT\\|TRACKSTORE\\|UN\\|VIEWER\\)\\|S\\(?:AVE\\(?:BETA\\)?\\|E\\(?:LECT\\(?:_PTC_NORMAL\\)?\\|QEDIT\\|T\\(?:CORR\\|PLOT\\|VARS\\(?:_LIN\\)?\\)?\\)\\|H\\(?:OW\\|RINK\\)\\|I\\(?:MPLEX\\|XTRACK\\)\\|ODD\\|T\\(?:ART\\|OP\\)\\|URVEY\\|XF\\(?:READ\\|WRITE\\)\\|YSTEM\\)\\|T\\(?:AB\\(?:INDEX\\|LE\\|STRING\\)\\|ITLE\\|OUSCHEK\\|RACK\\|WISS\\)\\|USE\\(?:KICK\\|MONITOR\\|_MACRO\\)?\\|VA\\(?:LUE\\|RY\\)\\|W\\(?:EIGHT\\|RITE\\)\\|system\\)\\>"
    . font-lock-builtin-face))
   "Highlighting expressions for MAD-X mode (builtin-all).")
@@ -174,7 +166,7 @@
   (list
    '("\\<\\(A\\(?:BS\\|COS\\|\\(?:SI\\|TA\\)N\\)\\|C\\(?:EIL\\|OSH?\\)\\|E\\(?:RFC?\\|XP\\)\\|FL\\(?:AT56?\\|OOR\\)\\|GAUSS\\|LOG\\(?:10\\)?\\|R\\(?:ANF\\|OUND\\)\\|S\\(?:IN[CH]?\\|QRT\\)\\|T\\(?:ANH?\\|GAUSS\\)\\)\\>"
      . font-lock-function-name-face))
-  "Highlighting expressions for MAD-X mode (name-all)" )
+  "Highlighting expressions for MAD-X mode (name-all)." )
 
 (defconst madx-font-lock-variable-name-face-all
   ;; madx-font-lock-keywords-variables_madx
@@ -188,7 +180,7 @@
   (list
    '("\\<\\(\\([0-9]+\\.?[0-9]*\\|\\.[0-9]+\\)\\([eE][+-]?\\([0-9]+\\.?[0-9]*\\|[0-9]*\\.[0-9]+\\)\\)?\\)\\>"
      . font-lock-keyword-face))
-  "Highlighting expresssions for MAD-X mode (integers and floats)")
+  "Highlighting expresssions for MAD-X mode (integers and floats).")
 
 (defconst madx-font-lock-keywords-4
   (append
@@ -211,34 +203,38 @@
 (defvar madx-mode-syntax-table
   (let ((madx-mode-syntax-table (make-syntax-table)))
 	
-    ; This is added so entity names with underscores and dots can be more easily parsed
-	(modify-syntax-entry ?_ "w" madx-mode-syntax-table)
-	(modify-syntax-entry ?. "w" madx-mode-syntax-table)
+  ;; This is added so entity names with underscores and dots can be more easily parsed
+  (modify-syntax-entry ?_ "w" madx-mode-syntax-table)
+  (modify-syntax-entry ?. "w" madx-mode-syntax-table)
 	
-	;  Comment styles are similar to C++
-	(modify-syntax-entry ?/ ". 124 b" madx-mode-syntax-table)
-	(modify-syntax-entry ?* ". 23" madx-mode-syntax-table)
-	(modify-syntax-entry ?\n "> b" madx-mode-syntax-table)
-	(modify-syntax-entry ?! "< b" madx-mode-syntax-table)
-	(modify-syntax-entry ?' "|" madx-mode-syntax-table)
-	madx-mode-syntax-table)
-  "Syntax table for madx-mode")
+  ;;  Comment styles are similar to C++
+  (modify-syntax-entry ?/ ". 124 b" madx-mode-syntax-table)
+  (modify-syntax-entry ?* ". 23" madx-mode-syntax-table)
+  (modify-syntax-entry ?\n "> b" madx-mode-syntax-table)
+  (modify-syntax-entry ?! "< b" madx-mode-syntax-table)
+  (modify-syntax-entry ?' "|" madx-mode-syntax-table)
+     madx-mode-syntax-table)
+  "Syntax table for `madx-mode'.")
 
-;;; ### autoload  
+;;### autoload
 (defun madx-mode ()
-  "Major mode for editing MAD-X script files"
+  "Major mode for editing MAD-X script files."
   (interactive)
   (kill-all-local-variables)
   (setq mode-name "MAD-X")
   (setq major-mode 'madx-mode)
-;  (use-local-map madx-mode-map)
+  ;;  (use-local-map madx-mode-map)
   (set-syntax-table madx-mode-syntax-table)
   (make-local-variable 'font-lock-defaults)
   (setq font-lock-defaults '(madx-font-lock-keywords nil t))
-;; Set up search
+  ;; Setting up Imenu
+  (setq imenu-generic-expression nil)
+  (setq imenu-prev-index-position-function nil)
+  (setq imenu-extract-index-name-function nil)
+  ;;  (imenu-create-index-function)
+  ;; Set up search
   (add-hook 'madx-mode-hook
      (lambda ()  (setq case-fold-search t)))
   (run-hooks 'madx-mode-hook))
 (provide 'madx-mode)
-
-;;; madx-mode.el ends here
+;;; madx.el ends here
