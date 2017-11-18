@@ -62,8 +62,6 @@
 ;; * Other syntax highlightings could be found inside the
 ;;   mad sources.  Check the 'syntax' folder in the madx dir !
 ;;   Write me to the email address above about any bug including an example.
-;; * One good example to modify this mode :
-;;   http://ergoemacs.org/emacs/elisp_syntax_coloring.html
 
 ;;; History:
 ;; v 1.0 First release at CERN. File is also available in the
