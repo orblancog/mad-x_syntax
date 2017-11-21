@@ -2,7 +2,7 @@ mad-x\_syntax
 =============
 
 ### MAD-X syntax highlighting for emacs.  
-Check the "madx.el" file header for installation instructions.
+Check the `madx.el' file header for installation instructions.
 
 
 ### FEATURES (v 1.4)
@@ -14,7 +14,7 @@ Check the "madx.el" file header for installation instructions.
     `M+X madx-mode`  
   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 * If the limit of 80 characters is desired, they could be highlighted differently
-  by uncomment the line
+  by uncomment the line in this (`madx.el') file.
   
 ```lisp
 (require 'whitespace)
@@ -22,7 +22,6 @@ Check the "madx.el" file header for installation instructions.
 (setq whitespace-style '(face lines-tail))
 (add-hook 'madx-mode-hook 'whitespace-mode)
 ```
-  in this (madx.el) file.
 
 ### CONTENT OF THIS REPO
 
@@ -34,16 +33,11 @@ All other files were created to test/optimize the performance.
 * v 1.0 First release at CERN. File is also available in the MAD-X sources syntax folder.
 * v 1.1 Adding comments and changing some verbosed names.
 * v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated.
-
         Adding some variables from MAD-X 5.02.10 manual.
-	
         Cleaning up faces 8D.
-	
         When exceeding 80 chars->extra chars in red
-	
 * v 1.3 Adding color to numbers and ;
 * v 1.4 Changes to put this file in the emacs elpa repository.
-
         Changing email address to orblancog@gmail.com
 
 ### TODO
@@ -63,7 +57,7 @@ Do not forget to visit
 [http://madx.web.cern.ch/madx](http://madx.web.cern.ch/madx)
 
 ### LICENCE, COPYRIGHT
-Copyright (C) 2014-2017 Oscar BLANCO
+Copyright (C) 2013, 2016, 2017 Oscar BLANCO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
