@@ -1,6 +1,6 @@
 ;;; madx-autoloads.el --- loads madx-mode
 
-;; Copyright (C) 2014-2017 Oscar BLANCO
+;; Copyright (C) 2017 Oscar BLANCO
 
 ;; Author     : orblancog <orblancog@gmail.com>
 ;; Maintainer : orblancog

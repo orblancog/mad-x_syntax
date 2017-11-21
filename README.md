@@ -1,14 +1,14 @@
 mad-x\_syntax
-============
+=============
 
-MAD-X syntax highlighting for emacs.  
+###MAD-X syntax highlighting for emacs.  
 Check the "madx.el" file header for installation instructions.
 
 
-###FEATURES (v 1.4)
+### FEATURES (v 1.4)
 
-* Edited to be compatible with emacs ELPA
-* Highlights commands, parameters and special operators in MAD-X 5.2.XX
+* Edited to be compatible with emacs ELPA repository
+* Highlights commands, parameters and special operators in MAD-X 5.X.X
 * If the file extension is '.madx' then the buffer is automatically highlighted,  
   but any buffer can be highlighted by doing :  
     `M+X madx-mode`  
@@ -20,31 +20,35 @@ Check the "madx.el" file header for installation instructions.
   in 'madx.el'. 
 
 
-###CONTENT OF THIS REPO
+### CONTENT OF THIS REPO
 
-The main file is 'madx.el'. 
+The main file is `madx.el'. 
 All other files were created to test/optimize the performance.
 
-###HISTORY
+### HISTORY
 
-* v 1.0 First release at CERN. File is also available in the
-      MAD-X sources "syntax" folder.
-* v 1.1 Adding comments and changing some verbosed names
-* v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated
-        Adding some variables from MAD-X 5.02.10 manual
-        Cleaning up faces 8D
-      when exceeding 80 chars->extra chars in red
-* v 1.3 adding color to numbers and ;
-* v 1.4 Changes to put this file in the emacs elpa repository
-      Changing email address to orblancog@gmail.com
+* v 1.0 First release at CERN. File is also available in the MAD-X sources syntax folder.
+* v 1.1 Adding comments and changing some verbosed names.
+* v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated.
 
-###TODO
+        Adding some variables from MAD-X 5.02.10 manual.
+	
+        Cleaning up faces 8D.
+	
+        When exceeding 80 chars->extra chars in red
+	
+* v 1.3 Adding color to numbers and ;
+* v 1.4 Changes to put this file in the emacs elpa repository.
+
+        Changing email address to orblancog@gmail.com
+
+### TODO
 
 I think a semicolon detection at the end of the line might be useful in madx. 
 Maybe autocompletion?? 
 
 
-###EXTRA
+### EXTRA
 
 You can find this and other MAD-X highlighting implementations, e.g. 
    emacs, KATE+KWRITE, VIM 
@@ -66,8 +70,6 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/license
+along with this program.  If not, see [http://www.gnu.org/license](http://www.gnu.org/license)
 
 ø
-    
-

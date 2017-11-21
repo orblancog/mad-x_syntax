@@ -1,6 +1,6 @@
 ;;; madx.el --- Major mode for editing MAD-X files in Emacs
 
-;; Copyright (C) 2014-2017 Oscar BLANCO
+;; Copyright (C) 2013, 2016, 2017 Oscar BLANCO
 
 ;; Author     : orblancog <orblancog@gmail.com>
 ;; Maintainer : orblancog
