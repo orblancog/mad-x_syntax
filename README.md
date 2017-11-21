@@ -5,8 +5,9 @@ MAD-X syntax highlighting for emacs.
 Check the "madx.el" file header for installation instructions.
 
 
-FEATURES (v 1.3)
+FEATURES (v 1.4)
 
+* Edited to be compatible with emacs ELPA
 * Highlights commands, parameters and special operators in MAD-X 5.2.XX
 * If the file extension is '.madx' then the buffer is automatically highlighted,  
   but any buffer can be highlighted by doing :  
