@@ -1,7 +1,7 @@
 mad-x\_syntax
 =============
 
-###MAD-X syntax highlighting for emacs.  
+### MAD-X syntax highlighting for emacs.  
 Check the "madx.el" file header for installation instructions.
 
 
@@ -13,12 +13,16 @@ Check the "madx.el" file header for installation instructions.
   but any buffer can be highlighted by doing :  
     `M+X madx-mode`  
   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
-* If the line is more than 80 characters long, the extra characters are 
-  highlighted differently. 
-  If you dont want this limit, comment/delete the line 
-      `(setq whitespace-line-column 80) ;; limit line length` 
-  in 'madx.el'. 
-
+* If the limit of 80 characters is desired, they could be highlighted differently
+  by uncomment the line
+  
+```lisp
+(require 'whitespace)
+(setq whitespace-line-column 80) ;; limit line length
+(setq whitespace-style '(face lines-tail))
+(add-hook 'madx-mode-hook 'whitespace-mode)
+```
+  in this (madx.el) file.
 
 ### CONTENT OF THIS REPO
 
@@ -70,6 +74,6 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
-along with this program.  If not, see [http://www.gnu.org/license](http://www.gnu.org/license)
+along with this program.  If not, see [http://www.gnu.org/licenses](http://www.gnu.org/licenses)
 
 ø
