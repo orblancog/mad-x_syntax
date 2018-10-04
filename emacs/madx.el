@@ -8,7 +8,7 @@
 ;; Created    : 18 Nov 2017
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.5
+;; Version    : 1.6
 
 ;; This file is not part of GNU Emacs
 
@@ -28,10 +28,10 @@
 ;; limitations under the Licence.
 
 ;;; Commentary:
-;; FEATURES in version 1.4
+;; FEATURES in version 1.6
 ;; * Highlights commands, parameters and special operators in MAD-X 5
-;; * If the file extension is '.madx' then the buffer is automatically highlighted,
-;;   but any buffer can be highlighted by doing :
+;; * If the file extension is '.madx' or '.seq' then the buffer is automatically
+;;   highlighted, but any buffer can be highlighted by doing :
 ;;       `M+X madx-mode`
 ;;   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 ;; * If the limit of 80 characters is desired, they could be highlighted differently
@@ -45,7 +45,7 @@
 ;; For EMACS 2.4 and on it should be available in the EMACS elpa repository,
 ;; otherwise,
 ;; 1. Copy this file (madx.el) to the highlighting definition folder, e.g.
-;;      a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X)
+;;      a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X or v25)
 ;;      b)  ~/.emacs.d/       ---> (Emacs v23.X.X)
 ;;      c)  ~/                ---> (Emacs v21.X.X)
 ;;    i.e.
@@ -57,7 +57,7 @@
 ;;      (setq font-lock-maximum-decoration t)
 ;;      (add-to-list 'load-path "~/.emacs.d");; <--- edit according to 1.
 ;;      (autoload 'madx-mode "madx" "MADX-mode" t)
-;;      (setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
+;;      (setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))
 ;;        auto-mode-alist))
 ;;      ;;;; END OF BLOCK TO COPY AND UNCOMMENT
 ;; 3. You should now restart EMACS in order to reload the environment variables.
@@ -79,6 +79,8 @@
 ;; v 1.3 adding color to numbers and ;
 ;; v 1.4 Changes to put this file in the emacs elpa repository
 ;;       Changing email address to orblancog@gmail.com
+;; v 1.5 Changing licence
+;; v 1.6 Adding automatic syntax highlighting for ".seq"
 
 ;;; Code:
 (defgroup madx nil
