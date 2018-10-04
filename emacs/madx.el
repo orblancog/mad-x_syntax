@@ -1,14 +1,14 @@
 ;;; madx.el --- Major mode for editing MAD-X files in Emacs
 
 ;; Copyright (C) 2013, 2016 Oscar BLANCO
-;;               2017, 2018 Oscar BLANCO, Istituto Nazionale di Fisica Nucleare
+;;               2017, 2018 Free Software Foundation
 
 ;; Author     : orblancog <orblancog@gmail.com>
 ;; Maintainer : orblancog
 ;; Created    : 18 Nov 2017
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.6
+;; Version    : 1.7
 
 ;; This file is not part of GNU Emacs
 
