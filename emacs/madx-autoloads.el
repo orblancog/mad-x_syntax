@@ -2,30 +2,28 @@
 
 
 ;; Copyright (C) 2013, 2016 Oscar BLANCO
-;;               2017, 2018 Oscar BLANCO, Istituto Nazionale di Fisica Nucleare
+;;               2017, 2018 FSF
 
 ;; Maintainer : orblancog
 ;; Created    : 18 Nov 2017
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.5
+;; Version    : 1.7
 
 ;; This file is not part of GNU Emacs
 
-;; Licensed under the EUPL, Version 1.1 or - as soon they will be
-;; approved by the European Commission - subsequent versions of the EUPL
-;; (the "Licence"). You may not use this work except in compliance with
-;; the Licence. You may obtain a copy of the Licence at:
-;;
-;; https://joinup.ec.europa.eu/software/page/eupl
-;;
-;; Unless required by applicable law or agreed to in writing, software
-;; distributed under the Licence is distributed on an "AS IS" basis,
-;; WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
-;; implied.
-;;
-;; See the Licence for the specific language governing permissions and
-;; limitations under the Licence.
+;; This program is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU Affero General Public License as
+;; published by the Free Software Foundation, either version 3 of the
+;; License, or (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU Affero General Public License for more details.
+
+;; You should have received a copy of the GNU Affero General Public License
+;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 ;; madx-mode autoload
@@ -36,7 +34,7 @@
 ;; edit accordingly to madx.el location
 ;(add-to-list 'load-path "~/.emacs.d")
 (autoload 'madx-mode "madx" "madx-mode" t)
-(setq auto-mode-alist (append '(("\\.madx$" . madx-mode))
+(setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))			      
    auto-mode-alist))
 
 (provide 'madx-autoloads)
