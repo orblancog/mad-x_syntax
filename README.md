@@ -5,12 +5,12 @@ mad-x\_syntax
 Check the `madx.el' file header for installation instructions.
 
 
-### FEATURES (v 1.5)
+### FEATURES (v 1.6)
 
 * Edited to be compatible with emacs ELPA repository
 * Highlights commands, parameters and special operators in MAD-X 5.X.X
-* If the file extension is '.madx' then the buffer is automatically highlighted,  
-  but any buffer can be highlighted by doing :  
+* If the file extension is '.madx' or '.seq' then the buffer is automatically 
+  highlighted, but any buffer can be highlighted by doing :  
     `M+X madx-mode`  
   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
 * If the limit of 80 characters is desired, they could be highlighted differently
@@ -40,6 +40,7 @@ All other files were created to test/optimize the performance.
 * v 1.4 Changes to put this file in the emacs elpa repository.
         Changing email address to orblancog@gmail.com
 * v 1.5 Changing Licence from GPLv3 to EUPL
+* v 1.6 Adding automatic highlighting for .seq files
 
 ### TODO
 
