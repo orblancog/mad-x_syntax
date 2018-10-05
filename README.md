@@ -5,7 +5,7 @@ mad-x\_syntax
 Check the `madx.el' file header for installation instructions.
 
 
-### FEATURES (v 1.6)
+### FEATURES (v 1.7)
 
 * Edited to be compatible with emacs ELPA repository
 * Highlights commands, parameters and special operators in MAD-X 5.X.X
@@ -41,6 +41,7 @@ All other files were created to test/optimize the performance.
         Changing email address to orblancog@gmail.com
 * v 1.5 Changing Licence from GPLv3 to EUPL
 * v 1.6 Adding automatic highlighting for .seq files
+* v 1.7 Editing source accourding to GNU suggestions
 
 ### TODO
 
@@ -51,9 +52,8 @@ Maybe autocompletion??
 ### EXTRA
 
 You can find this and other MAD-X highlighting implementations, e.g. 
-   emacs, KATE+KWRITE, VIM 
-inside the syntax folder in the madx sources 
-[http://svnweb.cern.ch/world/wsvn/madx](http://svnweb.cern.ch/world/wsvn/madx)
+   emacs, KATE+KWRITE, VIM, ATOM
+inside the syntax folder in the madx sources.
 
 Do not forget to visit 
 [http://madx.web.cern.ch/madx](http://madx.web.cern.ch/madx)
