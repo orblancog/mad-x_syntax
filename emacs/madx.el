@@ -83,8 +83,8 @@
 
 ;;; Code:
 (defgroup madx nil
- "Major mode to edit MAD-X files in emacs."
- :group 'languages)
+  "Major mode to edit MAD-X files in emacs."
+  :group 'languages)
 
 (defvar madx-mode-hook nil
   "Hook for madx-model initialize nil.")
@@ -99,7 +99,7 @@
 (defconst madx-font-lock-keywords-face-all
   ;; madx-font-lock-keywords-programflow
   `((,(regexp-opt '(;; font-lock-keyword-face
-		   ;; madx-font-lock-keywords-programflow
+		    ;; madx-font-lock-keywords-programflow
 		   "IF"
 		   "ELSEIF"
 		   "ELSE"
@@ -1047,43 +1047,20 @@
      madx-mode-syntax-table)
   "Syntax table for `madx-mode'.")
 
-;;;;###autoload
-;; (defun madx-mode ()
-;;   "Major mode for editing MAD-X script files."
-;;   (interactive)
-;;   (kill-all-local-variables)
-;;   (setq mode-name "MAD-X")
-;;   (setq major-mode 'madx-mode)
-;;   ;;  (use-local-map madx-mode-map)
-;;   (set-syntax-table madx-mode-syntax-table)
-;;   (make-local-variable 'font-lock-defaults)
-;;   (setq font-lock-defaults '(madx-font-lock-keywords nil t))
-;;   ;; Setting up Imenu
-;;   (setq imenu-generic-expression nil)
-;;   (setq imenu-prev-index-position-function nil)
-;;   (setq imenu-extract-index-name-function nil)
-;;   ;;  (imenu-create-index-function)
-;;   ;; Set up search
-;;   (setq case-fold-search t))
-;; (provide 'madx-mode)
-
-(define-derived-mode madx-mode fundamental-mode "madx script"
-  "Major mode for editing MAD-X script files."
-;;   (interactive)
-;;   (kill-all-local-variables)
-;;   (setq mode-name "MAD-X")
-;;   (setq major-mode 'madx-mode)
-;;   ;;  (use-local-map madx-mode-map)
-;;   (set-syntax-table madx-mode-syntax-table)
-;;   (make-local-variable 'font-lock-defaults)
-;;   (setq font-lock-defaults '(madx-font-lock-keywords nil t))
-;;   ;; Setting up Imenu
-;;   (setq imenu-generic-expression nil)
-;;   (setq imenu-prev-index-position-function nil)
-;;   (setq imenu-extract-index-name-function nil)
-;;   ;;  (imenu-create-index-function)
-;;   ;; Set up search
-;;   (setq case-fold-search t))
+(define-derived-mode madx-mode fundamental-mode "madx"
+  "Major mode for editing Methodical Accelerator Design X script files."
+  (kill-all-local-variables)
+  ;;  (use-local-map madx-mode-map)
+  (set-syntax-table madx-mode-syntax-table)
+  (make-local-variable 'font-lock-defaults)
+  (setq font-lock-defaults '(madx-font-lock-keywords nil t))
+  ;; Setting up Imenu
+  (setq imenu-generic-expression nil)
+  (setq imenu-prev-index-position-function nil)
+  (setq imenu-extract-index-name-function nil)
+  ;;  (imenu-create-index-function)
+  ;; Set up search
+  (setq case-fold-search t)
   )
 (provide 'madx-mode)
 ;;; madx.el ends here
