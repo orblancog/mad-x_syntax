@@ -8,7 +8,7 @@
 ;; Created    : 18 Nov 2017
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.7
+;; Version    : 1.8
 
 ;; This file is not part of GNU Emacs
 
@@ -26,12 +26,13 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; FEATURES in version 1.7
+;; FEATURES in version 1.8
 ;; * Highlights commands, parameters and special operators in MAD-X 5
 ;; * If the file extension is '.madx' or '.seq' then the buffer is automatically
 ;;   highlighted, but any buffer can be highlighted by doing :
-;;       `M+X madx-mode`
+;;       `M+X madx-mode` RET
 ;;   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
+;;   and RET means press RETURN key
 ;; * If the limit of 80 characters is desired, they could be highlighted differently
 ;;   by uncomment the line
 ;;       ;(require 'whitespace)
@@ -40,8 +41,9 @@
 ;;       ;(add-hook 'madx-mode-hook 'whitespace-mode)
 ;;   in this (madx.el) file.
 ;; HOW TO INSTALL IT
-;; For EMACS 2.4 and on it should be available in the EMACS elpa repository,
-;; otherwise,
+;; a) Open this file in emacs and execute
+;;      `M+X package-install-file` RET `madx.el` RET
+;; b)
 ;; 1. Copy this file (madx.el) to the highlighting definition folder, e.g.
 ;;      a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X or v25)
 ;;      b)  ~/.emacs.d/       ---> (Emacs v23.X.X)
@@ -58,7 +60,7 @@
 ;;      (setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))
 ;;        auto-mode-alist))
 ;;      ;;;; END OF BLOCK TO COPY AND UNCOMMENT
-;; 3. You should now restart EMACS in order to reload the environment variables.
+;; You should now restart EMACS in order to reload the environment variables.
 ;; INFO
 ;; * For mad instructions, visit
 ;;   mad.web.cern.ch/mad/
@@ -80,6 +82,8 @@
 ;; v 1.5 Changing licence
 ;; v 1.6 Adding automatic syntax highlighting for ".seq"
 ;; v 1.7 Chaging licence to gpl3 and code-checking following GNU ELPA suggestions
+;; v 1.8 Code changes following GNU suggestions
+;;       Adding comments about package-install-file
 
 ;;; Code:
 (defgroup madx nil
@@ -105,7 +109,8 @@
 		   "ELSE"
 		   "WHILE"
 		   "MACRO"
-		   ) 'words)
+		   )
+		  'words)
      .  font-lock-keyword-face))
   "Highlighting expressions for MAD-X mode (keywords-all).")
 
@@ -268,7 +273,8 @@
 		   ;; madx-font-lock-keywords-stringatt
 		   "TITLE"
 		   "system"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-builtin-face))
   "Highlighting expressions for MAD-X mode (builtin-all).")
 
@@ -311,7 +317,8 @@
 		   "NLLENS"
 		   "RFMULTIPOLE"
 		   "ELSEPARATOR"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-type-face))
   "Highlighting expressions for MAD-X mode (type-all).")
 
@@ -323,7 +330,8 @@
 		   "EALIGN"
 		   "EFCOMP"
 		   "SETERR"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-warning-face))
   "Highlighting expressions for MAD-X mode (warning-all).")
 
@@ -333,7 +341,8 @@
 		   ;; madx-font-lock-special_operators
 		   ":="
 		   "->"
-		   ) t)
+		   )
+		  t)
      . font-lock-warning-face))
   "Highlighting expressions for MAD-X mode (special-operators).")
 
@@ -380,7 +389,8 @@
 		   "RACETRACK"
 		   "OCTAGON"
 		   "TERMINAL"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-constant-face))
   "Highlighting expressions for MAD-X mode (constant-all).")
 
@@ -390,7 +400,8 @@
 		   ;; madx-font-lock-special_constants
 		   "#e"
 		   "#s"
-		   ) t)
+		   )
+		  t)
      . font-lock-constant-face))
   "Highlighting expressions for MAD-X mode (special_constants).")
 
@@ -802,7 +813,8 @@
 		   "AUTOPLACEDOWNSTREAM"
 		   "REFFRAME"
 		   "USE_PTCKNOBS"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-doc-face))
   "Highlighting expressions for MAD-X mode (doc-all).")
 
@@ -835,174 +847,170 @@
 		   "TGAUSS"
 		   "FLAT5"
 		   "FLAT56"
-		   ) 'words)
+		   )
+		  'words)
      . font-lock-function-name-face))
   "Highlighting expressions for MAD-X mode (name-all)." )
 
 (defconst madx-font-lock-variable-name-face-all
   ;; madx-font-lock-keywords-variables_madx
   `((,(concat (regexp-opt '(;; font-lock-variable-name-face
-		    ;; madx-font-lock-keywords-variables_madx
-		    "mvar1"
-		    "mvar2"
-		    "mvar3"
-		    "mvar4"
-		    "CIRC"
-		    "FREQ0"
-		    "DTBYDS"
-		    "U0"
-		    "QS"
-		    "ARAD"
-		    "PDAMP"
-		    "N1MIN"
-		    "Z"
-		    "PHI"
-		    "PSI"
-		    "X"
-		    "Y"
-		    "BETX"
-		    "BETY"
-		    "NAME"
-		    "S"
-		    "k0l"
-		    "k1l"
-		    "k2l"
-		    "k3l"
-		    "k4l"
-		    "K1"
-		    "K2"
-		    "K3"
-		    "K4"
-		    "K5"
-		    "K6"
-		    "K1L"
-		    "K2L"
-		    "K3L"
-		    "K4L"
-		    "K5L"
-		    "K6L"       
-		    "KICK1"
-		    "KICK2"
-		    "KICK3"
-		    "KICK4"
-		    "KICK5"
-		    "KICK6"
-		    "MU1"
-		    "MU2"
-		    "MU3"
-		    "MUX"
-		    "MUY"
-		    "PX"
-		    "PY"
-		    "PT"
-		    "DELTAP"
-		    "XN"
-		    "PXN"
-		    "WX"
-		    "PHI"
-		    "THETA"
-		    "PHIX"
-		    "YN"
-		    "PYN"
-		    "WY"
-		    "PHIY"
-		    "TN"
-		    "PTN"
-		    "WT"
-		    "PHIT"
-		    "ALFX"
-		    "DX"
-		    "DPX"
-		    "ALFY"
-		    "DY"
-		    "DPY"
-		    "ENERGY"
-		    "DMUX"
-		    "DDX"
-		    "DDPX"
-		    "DMUY"
-		    "DDY"
-		    "DDPY"
-		    "Q1"
-		    "Q2"
-		    "DQ1"
-		    "DQ2"
-		    "DDQ1"
-		    "DDQ2"
-		    "N1"
-		    "N1X_M"
-		    "N1Y_M"
-		    "APER_1"
-		    "APER_2"
-		    "APER_3"
-		    "APER_4"
-		    "RTOL"
-		    "XTOL"
-		    "YTOL"
-		    "ON_AP"
-		    "ON_ELEM"
-		    "LENGTH"
-		    "ORBIT5"
-		    "BETXMAX"
-		    "DXMAX"
-		    "DXRMS"
-		    "XCOMAX"
-		    "XRMS"
-		    "BETYMAX"
-		    "DYMAX"
-		    "DYRMS"
-		    "YCOMAX"
-		    "YCORMS"
-		    "SYNCH_1"
-		    "SYNCH_2"
-		    "SYNCH_3"
-		    "SYNCH_4"
-		    "SYNCH_5"
-		    "DISTANCE"
-		    "LYAPUNOV"
-		    "LOGDIST"
-		    "LOGTURNS"
-		    "RE"
-;		    "RE11";REPLACE BY RE[1-6][1-6]
-		    "T"
-;		    "T111";; REPLACE BY T[1-6][1-6][1-6]
-;		    "TM111";; REPLACE BY TM[1-6][1-6][1-6]
-;		    "BETA11"; REPLACE BY BETA[1-3][1-3]
-;		    "BETA11P"; REPLACE BY BETA[1-3][1-3]P
-		    "ALFA"
-;		    "ALFA11"; REPLACE BY ALFA[1-3][1-3]
-;		    "ALFA11P"; REPLACE BY ALFA[1-3][1-3]P
-		    "GAMMATR"
-		    "GAMAX"
-		    "GAMAY"
-;		    "GAMA11"; REPLACE BY GAMA[1-3][1-3]
-;		    "GAMA11P"; REPLACE BY GAMA[1-3][1-3]P
-;		    "GAMMA11"; REPLACE BY GAMA[1-3][1-3]
-		    "DISP1"
-		    "DISP2"
-		    "DISP3"
-		    "DISP4"
-;		    "DISP1P1"; REPLACE BY DISP[1-4]P[1-3]
-;		    "EIGN11"; REPLACE BY EIGN[1-6][1-6]
-		    "R"
-;		    "R11";; REPLACE BY R[1-6][1-6] AFTER REGEXP-OPT
-;		    "RM11";; REPLACE BY RM[1-6][1-6] AFTER REGEXP-OPT		    
-		    ) 'words)
+			    ;; madx-font-lock-keywords-variables_madx
+			    "mvar1"
+			    "mvar2"
+			    "mvar3"
+			    "mvar4"
+			    "CIRC"
+			    "FREQ0"
+			    "DTBYDS"
+			    "U0"
+			    "QS"
+			    "ARAD"
+			    "PDAMP"
+			    "N1MIN"
+			    "Z"
+			    "PHI"
+			    "PSI"
+			    "X"
+			    "Y"
+			    "BETX"
+			    "BETY"
+			    "NAME"
+			    "S"
+			    "k0l"
+			    "k1l"
+			    "k2l"
+			    "k3l"
+			    "k4l"
+			    "K1"
+			    "K2"
+			    "K3"
+			    "K4"
+			    "K5"
+			    "K6"
+			    "K1L"
+			    "K2L"
+			    "K3L"
+			    "K4L"
+			    "K5L"
+			    "K6L"       
+			    "KICK1"
+			    "KICK2"
+			    "KICK3"
+			    "KICK4"
+			    "KICK5"
+			    "KICK6"
+			    "MU1"
+			    "MU2"
+			    "MU3"
+			    "MUX"
+			    "MUY"
+			    "PX"
+			    "PY"
+			    "PT"
+			    "DELTAP"
+			    "XN"
+			    "PXN"
+			    "WX"
+			    "PHI"
+			    "THETA"
+			    "PHIX"
+			    "YN"
+			    "PYN"
+			    "WY"
+			    "PHIY"
+			    "TN"
+			    "PTN"
+			    "WT"
+			    "PHIT"
+			    "ALFX"
+			    "DX"
+			    "DPX"
+			    "ALFY"
+			    "DY"
+			    "DPY"
+			    "ENERGY"
+			    "DMUX"
+			    "DDX"
+			    "DDPX"
+			    "DMUY"
+			    "DDY"
+			    "DDPY"
+			    "Q1"
+			    "Q2"
+			    "DQ1"
+			    "DQ2"
+			    "DDQ1"
+			    "DDQ2"
+			    "N1"
+			    "N1X_M"
+			    "N1Y_M"
+			    "APER_1"
+			    "APER_2"
+			    "APER_3"
+			    "APER_4"
+			    "RTOL"
+			    "XTOL"
+			    "YTOL"
+			    "ON_AP"
+			    "ON_ELEM"
+			    "LENGTH"
+			    "ORBIT5"
+			    "BETXMAX"
+			    "DXMAX"
+			    "DXRMS"
+			    "XCOMAX"
+			    "XRMS"
+			    "BETYMAX"
+			    "DYMAX"
+			    "DYRMS"
+			    "YCOMAX"
+			    "YCORMS"
+			    "SYNCH_1"
+			    "SYNCH_2"
+			    "SYNCH_3"
+			    "SYNCH_4"
+			    "SYNCH_5"
+			    "DISTANCE"
+			    "LYAPUNOV"
+			    "LOGDIST"
+			    "LOGTURNS"
+			    "RE"
+					;		    "RE11";REPLACE BY RE[1-6][1-6]
+			    "T"
+					;		    "T111";; REPLACE BY T[1-6][1-6][1-6]
+					;		    "TM111";; REPLACE BY TM[1-6][1-6][1-6]
+					;		    "BETA11"; REPLACE BY BETA[1-3][1-3]
+					;		    "BETA11P"; REPLACE BY BETA[1-3][1-3]P
+			    "ALFA"
+					;		    "ALFA11"; REPLACE BY ALFA[1-3][1-3]
+					;		    "ALFA11P"; REPLACE BY ALFA[1-3][1-3]P
+			    "GAMMATR"
+			    "GAMAX"
+			    "GAMAY"
+					;		    "GAMA11"; REPLACE BY GAMA[1-3][1-3]
+					;		    "GAMA11P"; REPLACE BY GAMA[1-3][1-3]P
+					;		    "GAMMA11"; REPLACE BY GAMA[1-3][1-3]
+			    "DISP1"
+			    "DISP2"
+			    "DISP3"
+			    "DISP4"
+					;		    "DISP1P1"; REPLACE BY DISP[1-4]P[1-3]
+					;		    "EIGN11"; REPLACE BY EIGN[1-6][1-6]
+			    "R"
+					;		    "R11";; REPLACE BY R[1-6][1-6] AFTER REGEXP-OPT
+					;		    "RM11";; REPLACE BY RM[1-6][1-6] AFTER REGEXP-OPT		    
+			    )
+			  'words)
 	      ;; some variables already optimized
-	      "\\|RE[1-6][1-6]"
-	      "\\|T[1-6][1-6][1-6]"
-	      "\\|TM[1-6][1-6][1-6]"
-	      "\\|BETA[1-3][1-3]"
-	      "\\|BETA[1-3][1-3]P"
-	      "\\|ALFA[1-3][1-3]"
-	      "\\|ALFA[1-3][1-3]P"
-	      "\\|GAMA[1-3][1-3]"
-	      "\\|GAMA[1-3][1-3]P"
-	      "\\|GAMA[1-3][1-3]"
-	      "\\|DISP[1-4]P[1-3]"
-	      "\\|EIGN[1-6][1-6]"
-	      "\\|R[1-6][1-6]"
-	      "\\|RM[1-6][1-6]")
+	      "\\|\\<RE[1-6][1-6]\\>"
+	      "\\|\\<TM?[1-6][1-6][1-6]\\>"
+	      "\\|\\<BETA[1-3][1-3]P?\\>"
+	      "\\|\\<ALFA[1-3][1-3]P?\\>"
+	      "\\|\\<GAMA[1-3][1-3]P?\\>"
+	      "\\|\\<DISP[1-4]P[1-3]\\>"
+	      "\\|\\<EIGN[1-6][1-6]\\>"
+	      "\\|\\<RM?[1-6][1-6]\\>")
      . font-lock-variable-name-face))
   "Highlighting expressions for MAD-X mode (variable-name-all).")
 
@@ -1047,11 +1055,9 @@
      madx-mode-syntax-table)
   "Syntax table for `madx-mode'.")
 
+;;;###autoload
 (define-derived-mode madx-mode fundamental-mode "madx"
   "Major mode for editing Methodical Accelerator Design X script files."
-  (kill-all-local-variables)
-  ;;  (use-local-map madx-mode-map)
-  (set-syntax-table madx-mode-syntax-table)
   (make-local-variable 'font-lock-defaults)
   (setq font-lock-defaults '(madx-font-lock-keywords nil t))
   ;; Setting up Imenu
@@ -1062,5 +1068,15 @@
   ;; Set up search
   (setq case-fold-search t)
   )
+;; Enable syntax highlighting
+;;;###autoload
+(global-font-lock-mode t)
+;;;###autoload
+(setq font-lock-maximum-decoration t)
+;; Highlighting .madx and .seq buffers
+;;;###autoload
+(setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))			      
+			      auto-mode-alist))
+;;;###autoload
 (provide 'madx-mode)
 ;;; madx.el ends here
