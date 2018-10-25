@@ -2,10 +2,15 @@ mad-x\_syntax
 =============
 
 ### MAD-X syntax highlighting for emacs.  
-Check the `madx.el' file header for installation instructions.
+The main file is  `madx.el'. Download it, open it in emacs and do
+```lisp
+ package-install-file RET madx.el RET
+```
+(where RET means to press the RETURN key) or check the
+file header for installation instructions.
 
 
-### FEATURES (v 1.7)
+### FEATURES (v 1.8)
 
 * Edited to be compatible with emacs ELPA repository
 * Highlights commands, parameters and special operators in MAD-X 5.X.X
@@ -42,6 +47,8 @@ All other files were created to test/optimize the performance.
 * v 1.5 Changing Licence from GPLv3 to EUPL
 * v 1.6 Adding automatic highlighting for .seq files
 * v 1.7 Editing source accourding to GNU suggestions
+* v 1.8 Editing source accourding to GNU suggestions and adding info about
+        the command package-install-file
 
 ### TODO
 
