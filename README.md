@@ -4,9 +4,9 @@ mad-x\_syntax
 ### MAD-X syntax highlighting for emacs.  
 The main file is  `madx.el'. Download it, open it in emacs and do
 ```lisp
- package-install-file RET madx.el RET
+ M+X package-install-file RET madx.el RET
 ```
-(where RET means to press the RETURN key) or check the
+(where M+X means to to press the META key and the key 'x', and RET means to press the RETURN key) or check the
 file header for installation instructions.
 
 
