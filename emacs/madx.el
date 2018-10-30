@@ -1058,7 +1058,6 @@
 ;;;###autoload
 (define-derived-mode madx-mode fundamental-mode "madx"
   "Major mode for editing Methodical Accelerator Design X script files."
-  (make-local-variable 'font-lock-defaults)
   (setq font-lock-defaults '(madx-font-lock-keywords nil t))
   ;; Setting up Imenu
   (setq imenu-generic-expression nil)
@@ -1068,15 +1067,8 @@
   ;; Set up search
   (setq case-fold-search t)
   )
-;; Enable syntax highlighting
-;;;###autoload
-(global-font-lock-mode t)
-;;;###autoload
-(setq font-lock-maximum-decoration t)
 ;; Highlighting .madx and .seq buffers
 ;;;###autoload
-(setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))			      
-			      auto-mode-alist))
-;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.\\(madx\\|seq\\)\\'" . madx-mode))
 (provide 'madx-mode)
 ;;; madx.el ends here
