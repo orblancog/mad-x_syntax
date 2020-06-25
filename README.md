@@ -6,7 +6,7 @@ The main file is called 'madx.el' and is found in the 'emacs' folder. Download i
 ```lisp
  M+X package-install-file RET madx.el RET
 ```
-[where `M+X' means to to press the **META** key (i.e. **ALT** for most systems) and the `x' key at the same time, and `RET' means to press the **RETURN** key]. Otherwise, check the
+[where `M+X` means to to press the **META** key (i.e. **ALT** for most systems) and the `x` key at the same time, and `RET` means to press the **RETURN** key]. Otherwise, check the
 file header for installation instructions.
 
 
