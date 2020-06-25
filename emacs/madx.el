@@ -2,13 +2,14 @@
 
 ;; Copyright (C) 2013, 2016 Oscar BLANCO
 ;;               2017, 2018 FSF
+;;               2019, 2020 Oscar BLANCO
 
 ;; Author     : orblancog <orblancog@gmail.com>
 ;; Maintainer : orblancog
 ;; Created    : 18 Nov 2017
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.8
+;; Version    : 1.9
 
 ;; This file is not part of GNU Emacs
 
@@ -26,7 +27,7 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; FEATURES in version 1.8
+;; FEATURES in version 1.9
 ;; * Highlights commands, parameters and special operators in MAD-X 5
 ;; * If the file extension is '.madx' or '.seq' then the buffer is automatically
 ;;   highlighted, but any buffer can be highlighted by doing :
@@ -84,6 +85,7 @@
 ;; v 1.7 Chaging licence to gpl3 and code-checking following GNU ELPA suggestions
 ;; v 1.8 Code changes following GNU suggestions
 ;;       Adding comments about package-install-file
+;; v 1.9 Adding few ptc words to the highlighting list
 
 ;;; Code:
 (defgroup madx nil
@@ -417,6 +419,7 @@
 		   "MOMENT"
 		   "SURVEYALL"
 		   "DELTA_DEPENDENCY"
+		   "DELTAP_DEPENDENCY"
 		   "IGNORE_MAP_ORBIT"
 		   "RING_PARAMETERS"
 		   "CENTER_MAGNETS"
@@ -991,10 +994,7 @@
 					;		    "GAMA11"; REPLACE BY GAMA[1-3][1-3]
 					;		    "GAMA11P"; REPLACE BY GAMA[1-3][1-3]P
 					;		    "GAMMA11"; REPLACE BY GAMA[1-3][1-3]
-			    "DISP1"
-			    "DISP2"
-			    "DISP3"
-			    "DISP4"
+					;		    "DISP1; REPLACE BY DISP[1-4]P?[1-3]?"
 					;		    "DISP1P1"; REPLACE BY DISP[1-4]P[1-3]
 					;		    "EIGN11"; REPLACE BY EIGN[1-6][1-6]
 			    "R"
@@ -1008,7 +1008,7 @@
 	      "\\|\\<BETA[1-3][1-3]P?\\>"
 	      "\\|\\<ALFA[1-3][1-3]P?\\>"
 	      "\\|\\<GAMA[1-3][1-3]P?\\>"
-	      "\\|\\<DISP[1-4]P[1-3]\\>"
+	      "\\|\\<DISP[1-4]P?[1-3]?\\>"
 	      "\\|\\<EIGN[1-6][1-6]\\>"
 	      "\\|\\<RM?[1-6][1-6]\\>")
      . font-lock-variable-name-face))

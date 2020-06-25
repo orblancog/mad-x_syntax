@@ -2,18 +2,18 @@ mad-x\_syntax
 =============
 
 ### MAD-X syntax highlighting for emacs.  
-The main file is  `madx.el'. Download it, open it in emacs and do
+The main file is called 'madx.el' and is found in the 'emacs' folder. Download it, open it in emacs and type the expression
 ```lisp
  M+X package-install-file RET madx.el RET
 ```
-(where M+X means to to press the META key and the key 'x', and RET means to press the RETURN key) or check the
+[where `M+X' means to to press the **META** key (i.e. **ALT** for most systems) and the `x' key at the same time, and `RET' means to press the **RETURN** key]. Otherwise, check the
 file header for installation instructions.
 
 
-### FEATURES (v 1.8)
+### FEATURES (v 1.9)
 
 * Edited to be compatible with emacs ELPA repository
-* Highlights commands, parameters and special operators in MAD-X 5.X.X
+* Highlights commands, parameters and special operators in MAD-X 5.05.02
 * If the file extension is '.madx' or '.seq' then the buffer is automatically 
   highlighted, but any buffer can be highlighted by doing :  
     `M+X madx-mode`  
@@ -49,6 +49,7 @@ All other files were created to test/optimize the performance.
 * v 1.7 Editing source accourding to GNU suggestions
 * v 1.8 Editing source accourding to GNU suggestions and adding info about
         the command package-install-file
+* v 1.9 Adding few ptc words to the highlighting list
 
 ### TODO
 
@@ -68,6 +69,7 @@ Do not forget to visit
 ### LICENCE, COPYRIGHT
 Copyright (C) 2013, 2016 Oscar BLANCO
               2017, 2018 FSF
+              2019, 2020 Oscar BLANCO
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
