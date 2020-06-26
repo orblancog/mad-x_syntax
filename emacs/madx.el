@@ -6,10 +6,10 @@
 
 ;; Author     : orblancog <orblancog@gmail.com>
 ;; Maintainer : orblancog
-;; Created    : 18 Nov 2017
+;; Created    : 26 Jun 2020
 ;; Keywords   : languages
 ;; Homepage   : https://github.com/orblancog/mad-x_syntax
-;; Version    : 1.9
+;; Version    : 2.0
 
 ;; This file is not part of GNU Emacs
 
@@ -27,65 +27,75 @@
 ;; along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; FEATURES in version 1.9
-;; * Highlights commands, parameters and special operators in MAD-X 5
-;; * If the file extension is '.madx' or '.seq' then the buffer is automatically
-;;   highlighted, but any buffer can be highlighted by doing :
-;;       `M+X madx-mode` RET
-;;   where `M` is the **META** character in Emacs (`M` seems to be **ALT** in Linux)
-;;   and RET means press RETURN key
-;; * If the limit of 80 characters is desired, they could be highlighted differently
-;;   by uncomment the line
+;; ** FEATURES in version 2.0 **
+;;   * Highlights commands, parameters and special operators in MAD-X 5
+;;   * If the file extension is '.madx' or '.seq' then the buffer is automatically highlighted,
+;;     but, any buffer can be highlighted by typing the following sequence :
+;;        M-x madx-mode RETURN
+;;     where, M+x means to type the META character (i.e. ALT in most systems) and
+;;     the x key at the same time, and then type madx-mode and the RETURN key.
+;;   * If the limit of 80 characters is desired, they could be highlighted differently
+;;     by uncomment the line
 ;;       ;(require 'whitespace)
 ;;       ;(setq whitespace-line-column 80) ;; limit line length
 ;;       ;(setq whitespace-style '(face lines-tail))
 ;;       ;(add-hook 'madx-mode-hook 'whitespace-mode)
-;;   in this (madx.el) file.
-;; HOW TO INSTALL IT
-;; a) Open this file in emacs and execute
-;;      `M+X package-install-file` RET `madx.el` RET
-;; b)
-;; 1. Copy this file (madx.el) to the highlighting definition folder, e.g.
-;;      a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X or v25)
-;;      b)  ~/.emacs.d/       ---> (Emacs v23.X.X)
-;;      c)  ~/                ---> (Emacs v21.X.X)
-;;    i.e.
-;;      $ cp madx.el ~/.emacs.d/lisp/
-;; 2. Edit or create your .emacs file, typically in ~/
-;;      adding the following block where the load-path must match point 1.
-;;      ;;;; START OF BLOCK TO COPY AND UNCOMMENT
-;;      (global-font-lock-mode t);; Enable syntax highlighting
-;;      (setq font-lock-maximum-decoration t)
-;;      (add-to-list 'load-path "~/.emacs.d");; <--- edit according to 1.
-;;      (autoload 'madx-mode "madx" "MADX-mode" t)
-;;      (setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))
-;;        auto-mode-alist))
-;;      ;;;; END OF BLOCK TO COPY AND UNCOMMENT
-;; You should now restart EMACS in order to reload the environment variables.
-;; INFO
-;; * For mad instructions, visit
-;;   mad.web.cern.ch/mad/
-;; * Other syntax highlightings could be found inside the
-;;   mad sources.  Check the 'syntax' folder in the madx dir !
-;;   Write me to the email address above about any bug including an example.
+;;     in this (madx.el) file.
+;; ** HOW TO INSTALL **
+;;  1) Download the file madx.el from https://github.com/orblancog/mad-x_syntax
+;;  2)
+;;     - Emacs version >= 25. Open emacs Use the command
+;;          M+X package-install-file RETURN madx.el RETURN
+;;       And go to 3)
+;;     - Emacs version previous to 25
+;;         1. Copy this file (madx.el) to the highlighting definition folder,
+;;            the exact location depends on the emacs version
+;;              a)  ~/.emacs.d/lisp/  ---> (Emacs v24.5.X or v25)
+;;              b)  ~/.emacs.d/       ---> (Emacs v23.X.X)
+;;              c)  ~/                ---> (Emacs v21.X.X)
+;;            e.g.
+;;               $ cp madx.el ~/.emacs.d/lisp/
+;;         2. Edit or create your .emacs file,
+;;            the exact location depends on the emacs version,
+;;            typically in ~/ or in ~/.emacs.d/
+;;              Add the following block where the load-path must match point 1.
+;;
+;;              ;;;; START OF BLOCK TO COPY AND UNCOMMENT
+;;              (global-font-lock-mode t);; Enable syntax highlighting
+;;              (setq font-lock-maximum-decoration t)
+;;              (add-to-list 'load-path "~/.emacs.d");; <---!!! edit according to point 1!!!
+;;              (autoload 'madx-mode "madx" "MADX-mode" t)
+;;              (setq auto-mode-alist (append '(("\\.\\(\\(madx\\)\\|\\(seq\\)\\)$" . madx-mode))
+;;                auto-mode-alist))
+;;              ;;;; END OF BLOCK TO COPY AND UNCOMMENT
+;;
+;;  3) Close and reopen emacs to reload the environment variables.
+;; **INFO**
+;;   * For mad instructions, visit
+;;       http://madx.web.cern.ch/madx
+;;   * Other syntax highlightings could be found inside the
+;;     madx sources.  Check the 'syntax' folder in the madx dir !
+;;        for example: VIM, ATOM, KATE+KWRITE
+;;   * Write me to the email address above about any bug including an example.
 
 ;;; History:
-;; v 1.0 First release at CERN. File is also available in the
-;;       MAD-X sources "syntax" folder.
-;; v 1.1 Adding comments and changing some verbosed names
-;; v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated
-;;       Adding some variables from MAD-X 5.02.10 manual
-;;       Cleaning up faces 8D
-;;       when exceeding 80 chars->extra chars in red
-;; v 1.3 adding color to numbers and ;
-;; v 1.4 Changes to put this file in the emacs elpa repository
-;;       Changing email address to orblancog@gmail.com
-;; v 1.5 Changing licence
-;; v 1.6 Adding automatic syntax highlighting for ".seq"
-;; v 1.7 Chaging licence to gpl3 and code-checking following GNU ELPA suggestions
-;; v 1.8 Code changes following GNU suggestions
-;;       Adding comments about package-install-file
-;; v 1.9 Adding few ptc words to the highlighting list
+;; v 1.0             First release at CERN. File is also available in the
+;;                   MAD-X sources "syntax" folder.
+;; v 1.1             Adding comments and changing some verbosed names
+;; v 1.2             email update oscar.roberto.blanco.garcia@cern.ch deprecated
+;;                   Adding some variables from MAD-X 5.02.10 manual
+;;                   Cleaning up faces 8D
+;;                   when exceeding 80 chars->extra chars in red
+;; v 1.3             adding color to numbers and ;
+;; v 1.4             Changes to put this file in the emacs elpa repository
+;;                   Changing email address to orblancog@gmail.com
+;; v 1.5             Changing licence
+;; v 1.6             Adding automatic syntax highlighting for ".seq"
+;; v 1.7             Changing licence to gpl3 and code-checking following GNU ELPA suggestions
+;; v 1.8             Code changes following GNU suggestions
+;;                   Adding comments about package-install-file
+;; v 1.9             Adding few ptc words to the highlighting list
+;; v 2.0 2020/jun/26 Adding release date record
 
 ;;; Code:
 (defgroup madx nil

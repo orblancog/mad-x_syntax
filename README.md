@@ -10,10 +10,10 @@ The main file is called 'madx.el' and is found in the 'emacs' folder. Download i
 file header for installation instructions.
 
 
-### FEATURES (v 1.9)
+### FEATURES (v 2.0)
 
 * Edited to be compatible with emacs ELPA repository
-* Highlights commands, parameters and special operators in MAD-X 5.05.02
+* Highlights commands, parameters and special operators in MAD-X 5
 * If the file extension is '.madx' or '.seq' then the buffer is automatically 
   highlighted, but any buffer can be highlighted by doing :  
     `M+X madx-mode`  
@@ -35,21 +35,22 @@ All other files were created to test/optimize the performance.
 
 ### HISTORY
 
-* v 1.0 First release at CERN. File is also available in the MAD-X sources syntax folder.
-* v 1.1 Adding comments and changing some verbosed names.
-* v 1.2 email update oscar.roberto.blanco.garcia@cern.ch deprecated.
-        Adding some variables from MAD-X 5.02.10 manual.
-        Cleaning up faces 8D.
-        When exceeding 80 chars->extra chars in red
-* v 1.3 Adding color to numbers and ;
-* v 1.4 Changes to put this file in the emacs elpa repository.
-        Changing email address to orblancog@gmail.com
-* v 1.5 Changing Licence from GPLv3 to EUPL
-* v 1.6 Adding automatic highlighting for .seq files
-* v 1.7 Editing source accourding to GNU suggestions
-* v 1.8 Editing source accourding to GNU suggestions and adding info about
-        the command package-install-file
-* v 1.9 Adding few ptc words to the highlighting list
+* v 1.0             First release at CERN. File is also available in the MAD-X sources syntax folder.
+* v 1.1             Adding comments and changing some verbosed names.
+* v 1.2             email update oscar.roberto.blanco.garcia@cern.ch deprecated.
+                    Adding some variables from MAD-X 5.02.10 manual.
+                    Cleaning up faces 8D.
+                    When exceeding 80 chars->extra chars in red
+* v 1.3             Adding color to numbers and ;
+* v 1.4             Changes to put this file in the emacs elpa repository.
+                    Changing email address to orblancog@gmail.com
+* v 1.5             Changing Licence from GPLv3 to EUPL
+* v 1.6             Adding automatic highlighting for .seq files
+* v 1.7             Editing source accourding to GNU suggestions
+* v 1.8             Editing source accourding to GNU suggestions and adding info about
+                    the command package-install-file
+* v 1.9             Adding few ptc words to the highlighting list
+* v 2.0 2020/jun/26 Adding release date record
 
 ### TODO
 
